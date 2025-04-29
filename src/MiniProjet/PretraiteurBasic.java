@@ -1,13 +1,14 @@
-package MoteurRecherche;
+package MiniProjet;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class PretraiteurBasic implements Pretraiteur {
 
-	public List<String> pretraiter(List<String> list) {
+	public ArrayList<EntitéNom> pretraiter(ArrayList<EntitéNom> list) {
 		// TODO Auto-generated method stub
+		
 		
 		return null; 
 	}
-
+ 
 }
