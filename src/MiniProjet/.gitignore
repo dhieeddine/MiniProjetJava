@@ -1,0 +1,15 @@
+/ComparateurNoms.class
+/EntitéNom.class
+/GenerateurBasic.class
+/GenerateurCandidats.class
+/MoteurMatching.class
+/Pretraiteur.class
+/PretraiteurBasic.class
+/Recuperateur.class
+/RecuperateurCSV.class
+/ResultatComparaison.class
+/SelectionneurDeResultatsDeMatching.class
+/Application.class
+/ComparateurExact.class
+/SelectionneurNPremiers.class
+/SelectionnerAvecSeuil.class

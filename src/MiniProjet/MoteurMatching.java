@@ -6,22 +6,28 @@ import java.util.List;
 public class MoteurMatching {
 	
 	private Recuperateur recuperateur;
-	private GenerateurCandidats generateurCandidats;
-	private Pretraiteur pretraiteur;
-	private ComparateurNoms comparateurNoms;
-	private SelectionneurDeResultatsDeMatching selectionneur;
+    private GenerateurCandidats generateurCandidats;
+    private List<Pretraiteur> pretraiteur;
+    private ComparateurNoms comparateurNoms;
+    private SelectionneurDeResultatsDeMatching selectionneur;
 	
 	 
-	public MoteurMatching(Recuperateur recuperateur, GenerateurCandidats generateurCandidats, Pretraiteur pretraiteur,
+	public MoteurMatching(Recuperateur recuperateur, GenerateurCandidats generateurCandidats, List<Pretraiteur> pretraiteur,
 			ComparateurNoms comparateurNoms, SelectionneurDeResultatsDeMatching selectionneur) {
 		super();
 		this.recuperateur = recuperateur;
 		this.generateurCandidats = generateurCandidats;
-		this.pretraiteur = pretraiteur;
+		this.pretraiteur.addAll(pretraiteur);
 		this.comparateurNoms = comparateurNoms;
 		this.selectionneur = selectionneur;
 	}
-	
+	public MoteurMatching() {
+		 recuperateur = new RecuperateurCSV();
+	     generateurCandidats = new GenerateurBasic();
+	     pretraiteur = new ArrayList<>(List.of(new PretraiteurBasic()));
+	     comparateurNoms = new ComparateurExact();
+	     selectionneur = new SelectionneurNPremiers(10);
+	}
 	
 	public Recuperateur getRecuperateur() {
 		return recuperateur;
@@ -39,11 +45,11 @@ public class MoteurMatching {
 		this.generateurCandidats = generateurCandidats;
 	}
 
-	public Pretraiteur getPretraiteur() {
+	public List<Pretraiteur> getPretraiteur() {
 		return pretraiteur;
 	}
 
-	public void setPretraiteur(Pretraiteur pretraiteur) {
+	public void setPretraiteur(List<Pretraiteur> pretraiteur) {
 		this.pretraiteur = pretraiteur;
 	}
 
@@ -64,7 +70,7 @@ public class MoteurMatching {
 	}
 
 	
-	
+	 
 	
 	public ArrayList<ResultatComparaison> rechercher(String nom, String chemin){
 		
@@ -72,8 +78,12 @@ public class MoteurMatching {
 		ArrayList<EntitéNom> list2= new ArrayList<>();
 		EntitéNom entitéNom= new EntitéNom(nom, -1);
 		list2.add(entitéNom);
-		listeNoms=pretraiteur.pretraiter(listeNoms);
-		list2=pretraiteur.pretraiter(list2);
+		for(int i=0;i<pretraiteur.size();i++) {
+			listeNoms=pretraiteur.get(i).pretraiter(listeNoms);
+			list2=pretraiteur.get(i).pretraiter(list2);
+			
+		}
+		
 		
 		listeNoms = generateurCandidats.genererCandidats(listeNoms);
 		ArrayList<ResultatComparaison> resultat = new ArrayList<>();
