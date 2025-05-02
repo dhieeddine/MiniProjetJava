@@ -1,10 +1,10 @@
 package MiniProjet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Recuperateur {
 	
 
-	ArrayList<EntiteNom> recuperer(String chemin);
+	List<EntiteNom> recuperer(String chemin);
 
 }

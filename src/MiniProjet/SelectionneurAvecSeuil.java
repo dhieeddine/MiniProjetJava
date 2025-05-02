@@ -1,11 +1,11 @@
 package MiniProjet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SelectionneurAvecSeuil implements SelectionneurDeResultatsDeMatching {
 
 	@Override
-	public ArrayList<NomScore> selectionner(ArrayList<NomScore> liste) {
+	public List<NomScore> selectionner(List<NomScore> liste) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,11 +1,11 @@
 package MiniProjet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class GenerateurBasic implements GenerateurCandidats {
 
 	@Override
-	public ArrayList<EntiteNom> genererCandidats(ArrayList<EntiteNom> listeNom1, ArrayList<EntiteNom> listeNoms2) {
+	public List<CoupleDeNom> genererCandidats(List<EntiteNom> listeNom1,List<EntiteNom> listeNoms2) {
 		// TODO Auto-generated method stub
 		return null;
 	}

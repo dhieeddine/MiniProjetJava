@@ -1,11 +1,11 @@
 package MiniProjet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RecuperateurCSV implements Recuperateur {
 
 	@Override
-	public ArrayList<EntitéNom> recuperer(String chemin) {
+	public List<EntiteNom> recuperer(String chemin) {
 		String S=" eya";
 		return null;
 	}
