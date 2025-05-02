@@ -1,8 +1,8 @@
 package MiniProjet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface SelectionneurDeResultatsDeMatching {
-	ArrayList<ResultatComparaison> selectionner(ArrayList<ResultatComparaison> liste);
+	List<NomScore> selectionner(List<NomScore> liste);
 
 }

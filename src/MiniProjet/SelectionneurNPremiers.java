@@ -1,6 +1,6 @@
 package MiniProjet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SelectionneurNPremiers implements SelectionneurDeResultatsDeMatching {
 	private int nombreResultats;
@@ -9,7 +9,7 @@ public class SelectionneurNPremiers implements SelectionneurDeResultatsDeMatchin
 		this.nombreResultats = nombreResultats;
 	}
 	@Override
-	public ArrayList<ResultatComparaison> selectionner(ArrayList<ResultatComparaison> liste) {
+	public List<NomScore> selectionner(List<NomScore> liste) {
 		// TODO Auto-generated method stub
 		return null;
 	}

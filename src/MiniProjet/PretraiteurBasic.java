@@ -1,10 +1,10 @@
 package MiniProjet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PretraiteurBasic implements Pretraiteur {
 
-	public ArrayList<EntitéNom> pretraiter(ArrayList<EntitéNom> list) {
+	public List<EntiteNom> pretraiter(List<EntiteNom> list) {
 		// TODO Auto-generated method stub
 		
 		

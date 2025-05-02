@@ -1,10 +1,10 @@
 package MiniProjet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface GenerateurCandidats {
 	
 
-	ArrayList<EntitéNom> genererCandidats(ArrayList<EntitéNom> listeNoms); 
+	List<CoupleDeNom> genererCandidats(List<EntiteNom> listeNom1,List<EntiteNom> listeNoms2); 
 
 }

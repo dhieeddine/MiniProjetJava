@@ -5,6 +5,6 @@ import java.util.ArrayList;
 public interface Recuperateur {
 	
 
-	ArrayList<EntitéNom> recuperer(String chemin);
+	ArrayList<EntiteNom> recuperer(String chemin);
 
 }

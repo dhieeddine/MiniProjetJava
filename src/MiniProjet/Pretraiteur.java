@@ -1,9 +1,9 @@
 package MiniProjet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Pretraiteur {
-	public ArrayList<EntitéNom> pretraiter(ArrayList<EntitéNom> list);
+	public List<EntiteNom> pretraiter(List<EntiteNom> list);
 
 }
  

@@ -1,10 +1,10 @@
 package MiniProjet;
 
-public class EntitéNom {
+public class EntiteNom {
 	
 	private String Nomcomplet;
-	private int id;
-	public EntitéNom(String nomcomplet, int id) {
+	private String id;
+	public EntiteNom(String nomcomplet, String id) {
 		super();
 		Nomcomplet = nomcomplet;
 		this.id = id;
@@ -15,10 +15,10 @@ public class EntitéNom {
 	public void setNomcomplet(String nomcomplet) {
 		Nomcomplet = nomcomplet;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
