@@ -6,7 +6,7 @@ public class RecuperateurCSV implements Recuperateur {
 
 	@Override
 	public List<EntiteNom> recuperer(String chemin) {
-		String S=" eya";
+		
 		return null;
 	}
 
