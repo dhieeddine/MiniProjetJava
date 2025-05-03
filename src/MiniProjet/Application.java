@@ -5,6 +5,7 @@ import java.util.*;
 public class Application {
 	static MoteurMatching moteur = new MoteurMatching();
 	static Scanner scanner = new Scanner(System.in);
+	static Recuperateur recuperateur = new RecuperateurCSV();
 
 	public static void main(String[] args) {
 		   
@@ -197,11 +198,23 @@ public class Application {
 	  }
 	  
 	  static void effectuerRecherche()  {
-	        System.out.print("tepper le Nom à rechercher : ");
+	        System.out.print("tapper le Nom à rechercher : ");
 			String nom = scanner.nextLine();
 	
 	        System.out.print("tapper le Fichier des candidats : ");
-	        String fichier = scanner.nextLine();
+	        String chemin = scanner.nextLine();
+	       // System.out.println("Vous avez entré le chemin : " + chemin);
+	        List<EntiteNom> list =new ArrayList<EntiteNom>();
+	        list = recuperateur.recuperer(chemin);
+	        List<NomScore> listNomScores = new ArrayList<NomScore>();
+	        listNomScores = moteur.rechercher(nom, list);
+	        System.out.println("le candidat "+nom+" peut etre similaire a :\n");
+	        for(NomScore nomScore : listNomScores) {
+	        	System.out.println(nomScore.toString() +"\n");
+	        	
+	        	
+	        }
+	        
 	        
 	        	
 	  }

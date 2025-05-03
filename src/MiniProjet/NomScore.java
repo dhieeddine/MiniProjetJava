@@ -1,6 +1,10 @@
 package MiniProjet;
 
 public class NomScore {
+	@Override
+	public String toString() {
+		return "NomScore [score= " + score +  nom + "]";
+	}
 	private double score;
 	private EntiteNom nom;
 	public NomScore(double score, EntiteNom nom) {

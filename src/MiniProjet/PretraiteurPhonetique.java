@@ -26,7 +26,7 @@ public class PretraiteurPhonetique implements Pretraiteur {
 		        e.setNomcomplet(word);
 			
 		}
-		return list;
+		return list; 
 	}
 
 }

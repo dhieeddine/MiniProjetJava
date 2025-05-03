@@ -32,7 +32,7 @@ public class ComparateurNGram implements ComparateurNoms {
 	        }
 	        return ngrams;
 	   
+ 
 
-
-}
+     }
 }

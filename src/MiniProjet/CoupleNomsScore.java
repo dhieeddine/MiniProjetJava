@@ -1,6 +1,10 @@
 package MiniProjet;
 
 public class CoupleNomsScore {
+	@Override
+	public String toString() {
+		return "CoupleNomsScore [nom1= " + nom1 + ", nom2= " + nom2 + ", score= " + score + "]";
+	}
 	private EntiteNom nom1;
 	private EntiteNom nom2;
 	private double score;

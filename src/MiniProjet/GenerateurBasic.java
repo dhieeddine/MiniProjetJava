@@ -20,11 +20,6 @@ public class GenerateurBasic implements GenerateurCandidats {
 	    for(int i=0;i< rand; i++) {
 	    	listCouples.add(new CoupleDeNom(listeNoms2.get(random.nextInt(listeNoms2.size())) , listeNoms1.get(random.nextInt(listeNoms1.size()))));
 	    }
-	    
-
-	
-		
-		
 		
 		return listCouples;
 	}

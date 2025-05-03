@@ -12,6 +12,10 @@ public class EntiteNom {
 	public String getNomcomplet() {
 		return Nomcomplet;
 	}
+	@Override
+	public String toString() {
+		return " EntiteNom [Nomcomplet=" + Nomcomplet + ", id=" + id + "]";
+	}
 	public void setNomcomplet(String nomcomplet) {
 		Nomcomplet = nomcomplet;
 	}
