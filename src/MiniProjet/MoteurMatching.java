@@ -84,7 +84,7 @@ public class MoteurMatching {
 	     generateurCandidats = new GenerateurDeTousLesCouples();
 	     pretraiteur = new ArrayList<>(List.of(new PretraiteurMinuscule()));
 	     comparateurNoms = new ComparateurExact();
-	     selectionneur = new SelectionneurNPremiers(10);
+	     selectionneur = new SelectionneurDeTousLesResultats();
 	}
 
 

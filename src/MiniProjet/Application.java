@@ -217,11 +217,12 @@ public class Application {
 	        System.out.print("tapper le Nom à rechercher : ");
 			String nom = scanner.nextLine();
 	
-	        System.out.print("tapper le Fichier des candidats : ");
+	        System.out.print("tapper le chema de Fichier des candidats : ");
 	        String chemin = scanner.nextLine();
 	       // System.out.println("Vous avez entré le chemin : " + chemin);
 	        List<EntiteNom> list =new ArrayList<EntiteNom>();
 	        list = recuperateur.recuperer(chemin);
+	       
 	      
 	        
 	        if (list == null || list.isEmpty()) {
@@ -229,11 +230,14 @@ public class Application {
 	            return;
 	        }
 	        List<NomScore> listNomScores = new ArrayList<NomScore>(); 
-	        
-	        listNomScores = moteur.getSelectionneur().selectionner(moteur.rechercher(nom, list));
+	        listNomScores = moteur.rechercher(nom, list);
+	        for(NomScore e : listNomScores) {
+	        	System.out.println(e.toString());
+	        }
+	        listNomScores = moteur.getSelectionneur().selectionner(listNomScores);
 	        if (listNomScores == null || listNomScores.isEmpty()) {
 	            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
-	            return;    
+	            return;     
 	        }
 	        System.out.println("le candidat "+nom+" peut etre similaire a :\n");
 	        for(NomScore nomScore : listNomScores) {
