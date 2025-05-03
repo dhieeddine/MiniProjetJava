@@ -81,7 +81,7 @@ public class MoteurMatching {
 
 	public MoteurMatching() {
 		
-	     generateurCandidats = new GenerateurBasic(0);
+	     generateurCandidats = new GenerateurDeTousLesCouples();
 	     pretraiteur = new ArrayList<>(List.of(new PretraiteurMinuscule()));
 	     comparateurNoms = new ComparateurExact();
 	     selectionneur = new SelectionneurNPremiers(10);
@@ -112,16 +112,13 @@ public class MoteurMatching {
 			resultat.add(res);
 			
 			
-			
 		}  
-		
-		
-		
-		return selectionneur.selectionner(resultat);
-		
-		 
+		return resultat;
 		
 	}
+	
+	
+	 
 	public List<CoupleNomsScore> ComparerListes(List<EntiteNom> list1 ,List<EntiteNom> list2){
 		ArrayList<CoupleNomsScore> resultat=new ArrayList<CoupleNomsScore>();
 		for (EntiteNom nom :list1 ) {

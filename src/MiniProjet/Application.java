@@ -14,7 +14,7 @@ public class Application {
 			
 		
 			
-			 while (true) {
+		 while (true) {
 		            afficherMenuPrincipal();
 		            String choix = scanner.nextLine();
 	
@@ -57,44 +57,56 @@ public class Application {
 	  static void configurerParametres() {
 		  afficherMenuConfiguration();
           String choix = scanner.nextLine();
-
-          switch (choix) {
+          while (true) {
+        	  switch (choix) {
               case "1" -> choixPretraiteurs();
               case "2" -> choixComparateur();
               case "3" -> choixGenerateurDeCandidats();
-              case "4" -> configurerParametres();
-              case "5" -> {
-                  System.out.println("Fin du programme.");
-                  scanner.close();
+              case "4" -> {
+                
                   return;
               }
               default -> System.out.println("Choix invalide.");
+             }
           }
+
+          
 		  
 	  }
 	  static void afficherMenuGenerateurDeCandidats() {
 	        // TODO 
 	    	    System.out.println("\n===== MENU GENERATEUR DE CANDIDATS =====");
-	    	    System.out.println("1. Choisir generateur aleatoire\r\n");
-		        System.out.println("2. Choisir generateur par taille de noms \r\n");
-		        System.out.println("3. Quitter");
+	    	    System.out.println("1. Choisir tous combinisants possibles\r\n");
+	    	    System.out.println("2. Choisir generateur aleatoire\r\n");
+
+		        System.out.println("3. Choisir generateur par taille de noms \r\n");
+		        System.out.println("4. Quitter");
 		        System.out.print("Votre choix : ");
 	    }
 	  
 	  static void choixGenerateurDeCandidats() {
 		  afficherMenuGenerateurDeCandidats();
         String choix = scanner.nextLine();
-
-        switch (choix) {
-            case "1" -> generateurAleatoire();
-            case "2" -> generateurParTaille();
-            case "3" -> {
-                System.out.println("Fin du programme.");
-                scanner.close();
-                return;
-            }
-            default -> System.out.println("Choix invalide.");
+        while(true) {
+        	  switch (choix) {
+              case "1" -> generateurTous();
+              case "2" -> generateurAleatoire();
+              case "3" -> generateurParTaille();
+              case "4" -> {
+                  System.out.println("Fin du programme.");
+                  scanner.close();
+                  return;
+              }
+              default -> System.out.println("Choix invalide.");
+          } 
         }
+
+      
+	  }
+	  
+	  static void generateurTous() {
+		  moteur.setGenerateurCandidats(new GenerateurDeTousLesCouples());
+		  
 	  }
 	  static void generateurAleatoire() {
 		  System.out.println("\nchoisir le nombre de candidats à generer : ");
@@ -123,7 +135,8 @@ public class Application {
 		  afficherMenuComparateur();
           String choix = scanner.nextLine();
 
-          switch (choix) {
+          while(true) {
+        	  switch (choix) {
               case "1" -> choixComparateurExact();
               case "2" -> choixComparateurNGram();
               case "3" -> {
@@ -132,6 +145,7 @@ public class Application {
                   return;
               }
               default -> System.out.println("Choix invalide.");
+          }
           }
 		  
 		  
@@ -164,16 +178,18 @@ public class Application {
 		  afficheMenuPretraiteur();
           String choix = scanner.nextLine();
 
-          switch (choix) {
-              case "1" -> suprimerpretraiterMinuscule();
-              case "2" -> pretraiterPhonetique();
-              case "3" -> pretraiterAccents();
-              
-              case "4" -> {
-                  return;
-              }
-              default -> System.out.println("Choix invalide.");
-          }
+         while(true) {
+        	 switch (choix) {
+             case "1" -> suprimerpretraiterMinuscule();
+             case "2" -> pretraiterPhonetique();
+             case "3" -> pretraiterAccents();
+             
+             case "4" -> {
+                 return;
+             }
+             default -> System.out.println("Choix invalide.");
+         }
+         }
 		  
 	  }
 	  static void pretraiterPhonetique(){
@@ -206,8 +222,19 @@ public class Application {
 	       // System.out.println("Vous avez entré le chemin : " + chemin);
 	        List<EntiteNom> list =new ArrayList<EntiteNom>();
 	        list = recuperateur.recuperer(chemin);
-	        List<NomScore> listNomScores = new ArrayList<NomScore>();
-	        listNomScores = moteur.rechercher(nom, list);
+	      
+	        
+	        if (list == null || list.isEmpty()) {
+	            System.out.println("Erreur : la liste des candidats est vide ou n’a pas pu être chargée.");
+	            return;
+	        }
+	        List<NomScore> listNomScores = new ArrayList<NomScore>(); 
+	        
+	        listNomScores = moteur.getSelectionneur().selectionner(moteur.rechercher(nom, list));
+	        if (listNomScores == null || listNomScores.isEmpty()) {
+	            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
+	            return;    
+	        }
 	        System.out.println("le candidat "+nom+" peut etre similaire a :\n");
 	        for(NomScore nomScore : listNomScores) {
 	        	System.out.println(nomScore.toString() +"\n");
