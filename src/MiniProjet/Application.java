@@ -62,7 +62,8 @@ public class Application {
               case "1" -> choixPretraiteurs();
               case "2" -> choixComparateur();
               case "3" -> choixGenerateurDeCandidats();
-              case "4" -> {
+              case "4" -> choixSelectionneur();
+              case "5" -> {
                 
                   return;
               }
@@ -211,6 +212,51 @@ public class Application {
 		  }
 		  
 		  
+	  }
+	  
+	  static void afficheMenuSelectionneur() {
+	        System.out.println("\n===== MENU SELECTIONNEUR =====\n");
+	        System.out.println("1.Choisir selectionneur de tous les resultats\n");
+	        System.out.println("2.Choisir selectionneur aves seuil\n");
+	        System.out.println("3.Choisir selectionneur des N premiers\n");
+	        System.out.println("4. Quitter\n");
+	        System.out.print("Votre choix : ");
+		  
+	  }
+	  
+	  
+	  static void choixSelectionneur() {
+		  afficheMenuSelectionneur();
+          String choix = scanner.nextLine();
+
+          while(true) {
+        	  switch (choix) {
+              case "1" -> SelectionneurDeTousLesResultats();
+              case "2" -> SelectionneurAvecSeuil();
+              case "3" -> SelectionneurNPremiers();
+              case "4" -> {
+                  System.out.println("Fin du programme.");
+                  scanner.close();
+                  return;
+              }
+              default -> System.out.println("Choix invalide.");
+        	  }
+          }
+	  }
+      
+	  static void SelectionneurDeTousLesResultats() {
+		  moteur.setSelectionneur(new SelectionneurDeTousLesResultats());
+		  
+	  }
+	  static void SelectionneurAvecSeuil() {
+		  moteur.setSelectionneur(new SelectionneurAvecSeuil());
+	  }
+	  static void SelectionneurNPremiers() {
+		    System.out.println("Entrez le nombre de resultats a selectionner : ");
+		    int n = scanner.nextInt();
+		    scanner.nextLine(); 
+		    moteur.setSelectionneur(new SelectionneurNPremiers(n));
+	  
 	  }
 	  
 	  static void effectuerRecherche()  {

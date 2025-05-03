@@ -13,3 +13,16 @@
 /ComparateurExact.class
 /SelectionneurNPremiers.class
 /SelectionnerAvecSeuil.class
+/ComparateurNGram.class
+/CoupleDeNom.class
+/CoupleNomsScore.class
+/EntiteNom.class
+/GenerateurDeTousLesCouples.class
+/GenerateurParTaille.class
+/NomScore.class
+/PretraiteurMinuscule.class
+/PretraiteurPhonetique.class
+/PretraiteurSansAccents.class
+/PretraiteurSansCaracteresSpeciaux.class
+/SelectionneurAvecSeuil.class
+/SelectionneurDeTousLesResultats.class
