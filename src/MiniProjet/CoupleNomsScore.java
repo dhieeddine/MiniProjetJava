@@ -23,6 +23,10 @@ public class CoupleNomsScore implements ResultatDeMatching {
 	public void setNom2(EntiteNom nom2) {
 		this.nom2 = nom2;
 	}
+	@Override
+	public String toString() {
+		return "CoupleNomsScore [" + nom1 + ", " + nom2 + ", score=" + score + "]";
+	}
 	public double getScore() {
 		return score;
 	}

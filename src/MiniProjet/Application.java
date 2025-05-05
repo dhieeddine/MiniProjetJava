@@ -21,7 +21,7 @@ public class Application {
 		            switch (choix) {
 		                case "1" -> effectuerRecherche();
 		                case "2" -> comparerDeuxListes();
-		                case "3" -> dedupliquerListe();
+		                case "3" -> effectuerDedupliquerListe();
 		                case "4" -> configurerParametres();
 		                case "5" -> {
 		                    System.out.println("Fin du programme.");
@@ -49,15 +49,17 @@ public class Application {
 	    	    System.out.println("1. Choisir les prétraitements\r\n");
 		        System.out.println("2. Choisir une mesure de comparaison\r\n");
 		        System.out.println("3. Choisir un generateur de candidats\r\n");
-		        System.out.println("4. Quitter");
+		        System.out.println("4. Choisir un selectionneur\r\n");
+		        System.out.println("5. Quitter");
 		        System.out.print("Votre choix : ");
 	    }
  
 	    
 	  static void configurerParametres() {
-		  afficherMenuConfiguration();
-          String choix = scanner.nextLine();
+		 
           while (true) {
+        	  afficherMenuConfiguration();
+              String choix = scanner.nextLine();
         	  switch (choix) {
               case "1" -> choixPretraiteurs();
               case "2" -> choixComparateur();
@@ -86,16 +88,16 @@ public class Application {
 	    }
 	  
 	  static void choixGenerateurDeCandidats() {
-		  afficherMenuGenerateurDeCandidats();
-        String choix = scanner.nextLine();
+		 
         while(true) {
+        	 afficherMenuGenerateurDeCandidats();
+             String choix = scanner.nextLine();
         	  switch (choix) {
               case "1" -> generateurTous();
               case "2" -> generateurAleatoire();
               case "3" -> generateurParTaille();
               case "4" -> {
-                  System.out.println("Fin du programme.");
-                  scanner.close();
+                  
                   return;
               }
               default -> System.out.println("Choix invalide.");
@@ -112,7 +114,7 @@ public class Application {
 	  static void generateurAleatoire() {
 		  System.out.println("\nchoisir le nombre de candidats à generer : ");
 		  int n = scanner.nextInt();
-		  moteur.setGenerateurCandidats(new GenerateurBasic(n));
+		  moteur.setGenerateurCandidats(new GenerateurAleatoire(n));
 	  }
 	  
 	  
@@ -133,16 +135,16 @@ public class Application {
 	    }
 	  
 	  static void choixComparateur() {
-		  afficherMenuComparateur();
-          String choix = scanner.nextLine();
+		  
 
           while(true) {
+        	  afficherMenuComparateur();
+              String choix = scanner.nextLine();
         	  switch (choix) {
               case "1" -> choixComparateurExact();
               case "2" -> choixComparateurNGram();
               case "3" -> {
-                  System.out.println("Fin du programme.");
-                  scanner.close();
+                 
                   return;
               }
               default -> System.out.println("Choix invalide.");
@@ -235,13 +237,13 @@ public class Application {
               case "2" -> SelectionneurAvecSeuil();
               case "3" -> SelectionneurNPremiers();
               case "4" -> {
-                  System.out.println("Fin du programme.");
-                  scanner.close();
+                  
                   return;
               }
               default -> System.out.println("Choix invalide.");
         	  }
           }
+        
 	  }
       
 	  static void SelectionneurDeTousLesResultats() {
@@ -340,8 +342,24 @@ public class Application {
 		  
 	    }
 
-	    static void dedupliquerListe() {
+	    static void effectuerDedupliquerListe() {
 	        // TODO
+	    	 System.out.println("donner le chemin du liste à dupliquer : ");
+	    	 String chemin = scanner.next();
+	    	 List<EntiteNom> listeOriginale = recuperateur.recuperer(chemin);
+			    
+			    if (listeOriginale == null || listeOriginale.isEmpty()) {
+			        System.out.println("Erreur : la liste des candidats est vide ou n'a pas pu être chargée.");
+			        return;
+			    }
+			    List<CoupleNomsScore> resultat = new ArrayList<>(moteur.DedupliquerList(listeOriginale));
+			    if (resultat == null || resultat.isEmpty()) {
+		            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
+		            return;      
+		        }
+				 for(CoupleNomsScore couple : resultat) {
+					 System.out.println(couple.toString());
+				 }
 	    }
 
 	

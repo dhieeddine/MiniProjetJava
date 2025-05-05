@@ -120,6 +120,11 @@ public class MoteurMatching {
 	
 	 
 	public List<CoupleNomsScore> ComparerListes(List<EntiteNom> list1 ,List<EntiteNom> list2){
+		for(int i=0;i<pretraiteur.size();i++) {
+			list1=pretraiteur.get(i).pretraiter(list1);
+			list2=pretraiteur.get(i).pretraiter(list2);
+			
+		}
 		ArrayList<CoupleNomsScore> resultat=new ArrayList<CoupleNomsScore>();
 		for (EntiteNom nom :list1 ) {
 			List<NomScore> listNomsScores=rechercher(nom.getNomcomplet(),list2);
@@ -133,6 +138,10 @@ public class MoteurMatching {
 		return resultat;
 	}
 	public List<CoupleNomsScore> DedupliquerList(List<EntiteNom> list){
+		for(int i=0;i<pretraiteur.size();i++) {
+			list=pretraiteur.get(i).pretraiter(list); 
+			
+		}
 		List<CoupleNomsScore> resultat=new ArrayList<CoupleNomsScore>();
 		for (int i=0;i<list.size()-1;i++){
 			List<NomScore> listNomsScores=rechercher(list.get(i).getNomcomplet(),list.subList(i+1,list.size()));

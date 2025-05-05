@@ -2,11 +2,11 @@ package MiniProjet;
 
 import java.util.*;
 
-public class GenerateurBasic implements GenerateurCandidats {
+public class GenerateurAleatoire implements GenerateurCandidats {
 	int rand=0;
 	
 	
-	public GenerateurBasic(int rand) {
+	public GenerateurAleatoire(int rand) {
 		super();
 		this.rand = rand;
 	}

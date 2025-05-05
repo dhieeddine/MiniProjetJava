@@ -14,7 +14,7 @@ public class EntiteNom {
 	}
 	@Override
 	public String toString() {
-		return " EntiteNom [Nomcomplet=" + Nomcomplet + ", id=" + id + "]";
+		return " EntiteNom [Nomcomplet= " + Nomcomplet + ", id= " + id + "]";
 	}
 	public void setNomcomplet(String nomcomplet) {
 		Nomcomplet = nomcomplet;
