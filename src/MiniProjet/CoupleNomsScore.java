@@ -1,10 +1,7 @@
 package MiniProjet;
 
-public class CoupleNomsScore {
-	@Override
-	public String toString() {
-		return "CoupleNomsScore [nom1= " + nom1 + ", nom2= " + nom2 + ", score= " + score + "]";
-	}
+public class CoupleNomsScore implements ResultatDeMatching {
+	
 	private EntiteNom nom1;
 	private EntiteNom nom2;
 	private double score;
@@ -32,6 +29,6 @@ public class CoupleNomsScore {
 	public void setScore(double score) {
 		this.score = score;
 	}
-	
 
+	
 }

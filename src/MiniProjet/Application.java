@@ -249,7 +249,7 @@ public class Application {
 		  
 	  }
 	  static void SelectionneurAvecSeuil() {
-		  moteur.setSelectionneur(new SelectionneurAvecSeuil());
+		  moteur.setSelectionneur(new SelectionneurAvecSeuil(0));
 	  }
 	  static void SelectionneurNPremiers() {
 		    System.out.println("Entrez le nombre de resultats a selectionner : ");
@@ -260,37 +260,44 @@ public class Application {
 	  }
 	  
 	  static void effectuerRecherche()  {
-	        System.out.print("tapper le Nom à rechercher : ");
-			String nom = scanner.nextLine();
-	
-	        System.out.print("tapper le chema de Fichier des candidats : ");
-	        String chemin = scanner.nextLine();
-	       // System.out.println("Vous avez entré le chemin : " + chemin);
-	        List<EntiteNom> list =new ArrayList<EntiteNom>();
-	        list = recuperateur.recuperer(chemin);
-	       
-	      
-	        
-	        if (list == null || list.isEmpty()) {
-	            System.out.println("Erreur : la liste des candidats est vide ou n’a pas pu être chargée.");
-	            return;
-	        }
-	        List<NomScore> listNomScores = new ArrayList<NomScore>(); 
-	        listNomScores = moteur.rechercher(nom, list);
-	        for(NomScore e : listNomScores) {
-	        	System.out.println(e.toString());
-	        }
-	        listNomScores = moteur.getSelectionneur().selectionner(listNomScores);
-	        if (listNomScores == null || listNomScores.isEmpty()) {
-	            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
-	            return;     
-	        }
-	        System.out.println("le candidat "+nom+" peut etre similaire a :\n");
-	        for(NomScore nomScore : listNomScores) {
-	        	System.out.println(nomScore.toString() +"\n");
-	        	
-	        	
-	        }
+		  System.out.print("Entrez le nom à rechercher : ");
+		    String nomOriginal = scanner.nextLine();
+		    
+		    System.out.print("Entrez le chemin du fichier des candidats : ");
+		    String chemin = scanner.nextLine();
+		    
+		    List<EntiteNom> listeOriginale = recuperateur.recuperer(chemin);
+		    
+		    if (listeOriginale == null || listeOriginale.isEmpty()) {
+		        System.out.println("Erreur : la liste des candidats est vide ou n'a pas pu être chargée.");
+		        return;
+		    }
+		    
+		    List<EntiteNom> listePourTraitement = new ArrayList<>();
+		    for (EntiteNom entite : listeOriginale) {
+		        listePourTraitement.add(new EntiteNom(entite.getNomcomplet(), entite.getId()));
+		    }
+		    
+		    List<NomScore> resultats = moteur.rechercher(nomOriginal, listePourTraitement);
+		    
+		    System.out.println("\nRésultats pour : " + nomOriginal);
+		    for (NomScore ns : resultats) {
+		        EntiteNom entiteOriginale = null;
+		        for (EntiteNom e : listeOriginale) {
+		            if (e.getId().equals(ns.getNom().getId())) {
+		                entiteOriginale = e;
+		                break;
+		            }
+		        }
+		        
+		        if (entiteOriginale != null) {
+		            System.out.printf("Nom: %s (Score: %.2f)%n", 
+		                entiteOriginale.getNomcomplet(), 
+		                ns.getScore());
+		        }
+		    
+		    }
+		
 	        
 	        
 	        	
@@ -298,6 +305,39 @@ public class Application {
 	  
 	  static void comparerDeuxListes() {
 	        // TODO
+		  System.out.println("donner le chemin du liste 1");
+		  String chemin = scanner.next();
+		  List<EntiteNom> list1 =new ArrayList<EntiteNom>();
+	      list1 = recuperateur.recuperer(chemin);
+	      if (list1 == null || list1.isEmpty()) {
+	            System.out.println("Erreur : la liste 1  des candidats est vide ou n’a pas pu être chargée.");
+	            return;
+	        }
+	        
+	     System.out.println("donner le chemin du liste 2");
+		 chemin = scanner.next();
+		 List<EntiteNom> list2 =new ArrayList<EntiteNom>();
+		 list2 = recuperateur.recuperer(chemin);
+		 if (list2 == null || list2.isEmpty()) {
+	            System.out.println("Erreur : la liste 2 des candidats est vide ou n’a pas pu être chargée.");
+	            return;
+	        }
+		 List<CoupleNomsScore> resultat = new ArrayList<>();
+	       resultat = moteur.ComparerListes(list1, list2);
+		 
+		 
+	        for(CoupleNomsScore e : resultat) {
+	        	System.out.println(e.toString());
+	        }
+	        resultat = moteur.getSelectionneur().selectionner(resultat);
+	        if (resultat == null || resultat.isEmpty()) {
+	            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
+	            return;      
+	        }
+		 for(CoupleNomsScore couple : resultat) {
+			 System.out.println(couple.toString());
+		 }
+		  
 	    }
 
 	    static void dedupliquerListe() {

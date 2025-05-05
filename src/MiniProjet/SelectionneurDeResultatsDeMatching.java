@@ -3,6 +3,6 @@ package MiniProjet;
 import java.util.List;
 
 public interface SelectionneurDeResultatsDeMatching {
-	List<NomScore> selectionner(List<NomScore> liste);
+	<T extends ResultatDeMatching> List<T> selectionner(List<T> liste);
 
 }

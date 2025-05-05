@@ -108,7 +108,7 @@ public class MoteurMatching {
 		for(int i=0; i<coupleDeNoms.size(); i++) {
 			EntiteNom e = new EntiteNom(coupleDeNoms.get(i).getNom2().getNomcomplet() , coupleDeNoms.get(i).getNom2().getId());
 			double score = comparateurNoms.comparer(e.getNomcomplet(),entiteNom.getNomcomplet());
-			NomScore res = new NomScore( score,e);
+			NomScore res = new NomScore( e, score);
 			resultat.add(res);
 			
 			

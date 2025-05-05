@@ -5,7 +5,7 @@ import java.util.List;
 public class SelectionneurDeTousLesResultats implements SelectionneurDeResultatsDeMatching {
 
 	@Override
-	public List<NomScore> selectionner(List<NomScore> liste) {
+	public <T extends ResultatDeMatching> List<T> selectionner(List<T> liste) {
 		// TODO Auto-generated method stub
 		return liste;
 	}

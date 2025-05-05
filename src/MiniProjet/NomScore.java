@@ -1,16 +1,21 @@
 package MiniProjet;
 
-public class NomScore {
+public class NomScore implements ResultatDeMatching {
+
+	
+	
+	private EntiteNom nom;
+	private double score;
+	
+	
 	@Override
 	public String toString() {
-		return "NomScore [score= " + score +  nom + "]";
+		return "NomScore ["+ nom + ", score=" + score + "]";
 	}
-	private double score;
-	private EntiteNom nom;
-	public NomScore(double score, EntiteNom nom) {
+	public NomScore(EntiteNom nom, double score) {
 		super();
-		this.score = score;
 		this.nom = nom;
+		this.score = score;
 	}
 	public double getScore() {
 		return score;
