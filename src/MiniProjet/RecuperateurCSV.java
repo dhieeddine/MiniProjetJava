@@ -5,7 +5,10 @@ import java.util.*;
 public class RecuperateurCSV implements Recuperateur {
 
 	@Override
-	public List<EntiteNom> recuperer(String chemin) {
+	public List<EntiteNom> recuperer() {
+		System.out.println("donner le chema de fichier csv :");
+	    Scanner scanner = new Scanner(System.in);
+	    String chemin = scanner.nextLine();
 		
 		
 		        List<EntiteNom> entites = new ArrayList<>();

@@ -8,8 +8,8 @@ public class PretraiteurSansCaracteresSpeciaux implements Pretraiteur {
 	public List<EntiteNom> pretraiter(List<EntiteNom> list) {
 		// TODO Auto-generated method stub
 		for(EntiteNom nom : list) {
-			nom.setNomcomplet(nom.getNomcomplet().replaceAll("[^\\p{L}\\p{Nd} ]", ""));
-		}
+			nom.setNomcomplet(nom.getNomcomplet().replaceAll("[^\\p{L}\\p{Nd} ]", "").trim().replaceAll(" +", " "));
+		   		}
 		return list;
 	}
 

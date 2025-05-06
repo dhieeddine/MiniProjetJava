@@ -5,6 +5,6 @@ import java.util.List;
 public interface Recuperateur {
 	
 
-	List<EntiteNom> recuperer(String chemin);
+	List<EntiteNom> recuperer();
 
 }

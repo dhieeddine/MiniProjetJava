@@ -10,7 +10,6 @@ public class Application {
 	public static void main(String[] args) {
 		   
 	
-			// TODO Auto-generated method stub
 			
 		
 			
@@ -40,7 +39,7 @@ public class Application {
 	        System.out.println("3. Dédupliquer une liste\n");
 	        System.out.println("4. Configurer les paramètres\n");
 	        System.out.println("5. Quitter\n");
-	        System.out.print("Votre choix : ");
+	        System.out.print("\nVotre choix : ");
 	  }
 	  
 	    static void afficherMenuConfiguration() {
@@ -50,8 +49,8 @@ public class Application {
 		        System.out.println("2. Choisir une mesure de comparaison\r\n");
 		        System.out.println("3. Choisir un generateur de candidats\r\n");
 		        System.out.println("4. Choisir un selectionneur\r\n");
-		        System.out.println("5. Quitter");
-		        System.out.print("Votre choix : ");
+		        System.out.println("5. Quitter\n");
+		        System.out.print("\nVotre choix : ");
 	    }
  
 	    
@@ -69,7 +68,7 @@ public class Application {
                 
                   return;
               }
-              default -> System.out.println("Choix invalide.");
+              default -> System.out.println("\nChoix invalide.");
              }
           }
 
@@ -83,7 +82,7 @@ public class Application {
 	    	    System.out.println("2. Choisir generateur aleatoire\r\n");
 
 		        System.out.println("3. Choisir generateur par taille de noms \r\n");
-		        System.out.println("4. Quitter");
+		        System.out.println("4. Quitter\n");
 		        System.out.print("Votre choix : ");
 	    }
 	  
@@ -100,7 +99,7 @@ public class Application {
                   
                   return;
               }
-              default -> System.out.println("Choix invalide.");
+              default -> System.out.println("\nChoix invalide.");
           } 
         }
 
@@ -127,10 +126,12 @@ public class Application {
 	  
 	  static void afficherMenuComparateur() {
 	        // TODO 
-	    	    System.out.println("\n===== MENU COMPARATEUR =====");
+	    	    System.out.println("\n===== MENU COMPARATEUR =====\n");
 	    	    System.out.println("1. Choisir comparateur exact\r\n");
 		        System.out.println("2. Choisir comparateur avec N-Gram \r\n");
-		        System.out.println("3. Quitter");
+		        System.out.println("3. choisir comparateru de Levenstein\n");
+		        System.out.println("4. choisir comparateru de JaroWinkler\n");
+		        System.out.println("5. Quitter");
 		        System.out.print("Votre choix : ");
 	    }
 	  
@@ -143,7 +144,9 @@ public class Application {
         	  switch (choix) {
               case "1" -> choixComparateurExact();
               case "2" -> choixComparateurNGram();
-              case "3" -> {
+              case "3" -> choixComparateurLevenstein() ;
+              case "4" -> choixComparateurJaro();
+              case "5" -> {
                  
                   return;
               }
@@ -157,10 +160,18 @@ public class Application {
 		  moteur.setComparateurNoms(new ComparateurExact());
 		  
 	  }
+	  static void choixComparateurJaro() {
+		  moteur.setComparateurNoms(new comparateurJaroWinkler()); 
+		  
+	  }
 	  static void choixComparateurNGram() {
 		  System.out.println("\nchoisir le nombre de decomposition : ");
 		  int n = scanner.nextInt();
 		  moteur.setComparateurNoms(new ComparateurNGram(n));
+		  
+	  }
+	  static void choixComparateurLevenstein() {
+		  moteur.setComparateurNoms(new ComparateurLevenstein());
 		  
 	  }
 	  
@@ -172,8 +183,9 @@ public class Application {
 	        System.out.println("Le pretraiteur par defaut est le pretraiteur en minuscule\n");
 	        System.out.println("1.suprimer le pretraiteur en minuscule\n");
 	        System.out.println("2. Encodage phonétique\n");
-	        System.out.println("3. Suprimer les accents et les caractaires speciciaux\n");
-	        System.out.println("4. Quitter\n");
+	        System.out.println("3. Suprimer les accents \n");
+	        System.out.println("4. Suprimer les caractaires speciciaux\n");
+	        System.out.println("5. Quitter\n");
 	        System.out.print("Votre choix : ");
 		  
 	  }
@@ -186,7 +198,8 @@ public class Application {
 		            case "1" -> suprimerpretraiterMinuscule();
 		            case "2" -> pretraiterPhonetique();
 		            case "3" -> pretraiterAccents();
-		            case "4" -> {
+		            case "4" -> pretraiteurSansCaracteresSpeciaux();
+		            case "5" -> {
 		                return;
 		            }
 		            default -> System.out.println("Choix invalide.");
@@ -195,10 +208,23 @@ public class Application {
 		}
 
 	  static void pretraiterPhonetique(){
+		  for (Pretraiteur p : moteur.getPretraiteur()) {
+			  if (p instanceof  PretraiteurPhonetique) {
+				  System.out.println("ce pretraiteur exist deja!!");
+				  return;
+			  }
+		  }
+		  
 		  moteur.getPretraiteur().add(new PretraiteurPhonetique());
 		  
 	  }
 	  static void pretraiterAccents() {
+		  for (Pretraiteur p : moteur.getPretraiteur()) {
+			  if (p instanceof  PretraiteurSansAccents)  {
+				  System.out.println("ce pretraiteur exist deja!!");
+				  return;
+			  }
+		  }
 		  moteur.getPretraiteur().add(new PretraiteurSansAccents()); 
 
 	  }
@@ -211,6 +237,16 @@ public class Application {
 		        }
 		    }
 		}
+	  static void pretraiteurSansCaracteresSpeciaux() {
+		  for (Pretraiteur p : moteur.getPretraiteur()) {
+			  if (p instanceof  PretraiteurSansCaracteresSpeciaux) {
+				  System.out.println("ce pretraiteur exist deja!!");
+				  return;
+				  
+			  }
+		  }
+		  moteur.getPretraiteur().add(new PretraiteurSansCaracteresSpeciaux());
+	  }
 
 	  
 	  static void afficheMenuSelectionneur() {
@@ -246,7 +282,18 @@ public class Application {
 		  
 	  }
 	  static void SelectionneurAvecSeuil() {
-		  moteur.setSelectionneur(new SelectionneurAvecSeuil(0));
+		
+		  System.out.println("donner le seuil :");
+		  String saisie = scanner.nextLine().trim().replace(',', '.');
+
+	        try {
+	            double seuil = Double.parseDouble(saisie);
+	            System.out.println("Seuil accepté : " + seuil);
+	            moteur.setSelectionneur(new SelectionneurAvecSeuil(seuil));
+	        } catch (NumberFormatException e) {
+	            System.out.println("Erreur : valeur non valide !");
+	        }
+		 
 	  }
 	  static void SelectionneurNPremiers() {
 		    System.out.println("Entrez le nombre de resultats a selectionner : ");
@@ -258,42 +305,30 @@ public class Application {
 	  
 	  static void effectuerRecherche()  {
 		  System.out.print("Entrez le nom à rechercher : ");
-		    String nomOriginal = scanner.nextLine();
+		    String nom = scanner.nextLine();
 		    
-		    System.out.print("Entrez le chemin du fichier des candidats : ");
-		    String chemin = scanner.nextLine();
+		   
 		    
-		    List<EntiteNom> listeOriginale = recuperateur.recuperer(chemin);
+		    List<EntiteNom> liste = recuperateur.recuperer();
 		    
-		    if (listeOriginale == null || listeOriginale.isEmpty()) {
+		    if (liste == null || liste.isEmpty()) {
 		        System.out.println("Erreur : la liste des candidats est vide ou n'a pas pu être chargée.");
 		        return;
 		    }
 		    
-		    List<EntiteNom> listePourTraitement = new ArrayList<>();
-		    for (EntiteNom entite : listeOriginale) {
-		        listePourTraitement.add(new EntiteNom(entite.getNomcomplet(), entite.getId()));
-		    }
 		    
-		    List<NomScore> resultats = moteur.rechercher(nomOriginal, listePourTraitement);
 		    
-		    System.out.println("\nRésultats pour : " + nomOriginal);
+		    List<NomScore> resultats = moteur.rechercher(nom, liste);
+		    
+		    System.out.println("\nRésultats pour : " + nom);
 		    for (NomScore ns : resultats) {
-		        EntiteNom entiteOriginale = null;
-		        for (EntiteNom e : listeOriginale) {
-		            if (e.getId().equals(ns.getNom().getId())) {
-		                entiteOriginale = e;
-		                break;
-		            }
-		        }
 		        
-		        if (entiteOriginale != null) {
 		            System.out.printf("Nom: %s (Score: %.2f)%n", 
-		                entiteOriginale.getNomcomplet(), 
+		                ns.getNom().toString(), 
 		                ns.getScore());
 		        }
 		    
-		    }
+		    
 		
 	        
 	        
@@ -302,19 +337,17 @@ public class Application {
 	  
 	  static void comparerDeuxListes() {
 	        // TODO
-		  System.out.println("donner le chemin du liste 1");
-		  String chemin = scanner.next();
+		  
 		  List<EntiteNom> list1 =new ArrayList<EntiteNom>();
-	      list1 = recuperateur.recuperer(chemin);
+	      list1 = recuperateur.recuperer();
 	      if (list1 == null || list1.isEmpty()) {
 	            System.out.println("Erreur : la liste 1  des candidats est vide ou n’a pas pu être chargée.");
 	            return;
 	        }
 	        
-	     System.out.println("donner le chemin du liste 2");
-		 chemin = scanner.next();
+	     
 		 List<EntiteNom> list2 =new ArrayList<EntiteNom>();
-		 list2 = recuperateur.recuperer(chemin);
+		 list2 = recuperateur.recuperer();
 		 if (list2 == null || list2.isEmpty()) {
 	            System.out.println("Erreur : la liste 2 des candidats est vide ou n’a pas pu être chargée.");
 	            return;
@@ -332,7 +365,7 @@ public class Application {
 	            return;      
 	        }
 		 for(CoupleNomsScore couple : resultat) {
-			 System.out.println(couple.toString());
+			 System.out.printf("couple[ %s , %s] score = %.2f",couple.getNom1().toString(),couple.getNom2().toString(), couple.getScore());
 		 }
 		  
 	    }
@@ -341,7 +374,7 @@ public class Application {
 	        // TODO
 	    	 System.out.println("donner le chemin du liste à dupliquer : ");
 	    	 String chemin = scanner.next();
-	    	 List<EntiteNom> listeOriginale = recuperateur.recuperer(chemin);
+	    	 List<EntiteNom> listeOriginale = recuperateur.recuperer();
 			    
 			    if (listeOriginale == null || listeOriginale.isEmpty()) {
 			        System.out.println("Erreur : la liste des candidats est vide ou n'a pas pu être chargée.");
@@ -353,7 +386,7 @@ public class Application {
 		            return;      
 		        }
 				 for(CoupleNomsScore couple : resultat) {
-					 System.out.println(couple.toString());
+					 System.out.printf("couple[ %s , %s] score = %.2f",couple.getNom1().toString(),couple.getNom2().toString(), couple.getScore());
 				 }
 	    }
 

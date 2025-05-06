@@ -14,6 +14,9 @@ public class GenerateurAleatoire implements GenerateurCandidats {
 	@Override
 	public List<CoupleDeNom> genererCandidats(List<EntiteNom> listeNoms1,List<EntiteNom> listeNoms2) {
 		// TODO Auto-generated method stub
+		if (listeNoms1 == null || listeNoms1.isEmpty() || listeNoms2 == null || listeNoms2.isEmpty()) {
+            return new ArrayList<CoupleDeNom>();
+        }
 		List<CoupleDeNom> listCouples = new ArrayList<CoupleDeNom>();
 		Random random = new Random();
 		

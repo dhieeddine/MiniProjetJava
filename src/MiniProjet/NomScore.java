@@ -17,6 +17,7 @@ public class NomScore implements ResultatDeMatching {
 		this.nom = nom;
 		this.score = score;
 	}
+	@Override
 	public double getScore() {
 		return score;
 	}

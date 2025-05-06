@@ -25,7 +25,7 @@ public class CoupleNomsScore implements ResultatDeMatching {
 	}
 	@Override
 	public String toString() {
-		return "CoupleNomsScore [" + nom1 + ", " + nom2 + ", score=" + score + "]";
+		return "CoupleNomsScore [" + nom1 + ", " + nom2 + ", score= " + score + "]";
 	}
 	public double getScore() {
 		return score;

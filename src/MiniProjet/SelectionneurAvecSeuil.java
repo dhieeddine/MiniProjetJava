@@ -21,7 +21,7 @@ public class SelectionneurAvecSeuil implements SelectionneurDeResultatsDeMatchin
 	@Override
 	public <T extends ResultatDeMatching> List<T> selectionner(List<T> liste) {
 	    if (liste == null || liste.isEmpty()) {
-	        return new ArrayList<>();
+	        return new ArrayList<T>();
 	    }
 
 	    List<T> resultatsFiltres = new ArrayList<>();
