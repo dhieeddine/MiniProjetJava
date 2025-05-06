@@ -77,7 +77,7 @@ public class Application {
 		  
 	  }
 	  static void afficherMenuGenerateurDeCandidats() {
-	        // TODO 
+	  
 	    	    System.out.println("\n===== MENU GENERATEUR DE CANDIDATS =====");
 	    	    System.out.println("1. Choisir tous combinisants possibles\r\n");
 	    	    System.out.println("2. Choisir generateur aleatoire\r\n");
@@ -178,43 +178,40 @@ public class Application {
 		  
 	  }
 	  static void choixPretraiteurs() {
-		  afficheMenuPretraiteur();
-          String choix = scanner.nextLine();
+		    while (true) {
+		        afficheMenuPretraiteur();
+		        String choix = scanner.nextLine();
 
-         while(true) {
-        	 switch (choix) {
-             case "1" -> suprimerpretraiterMinuscule();
-             case "2" -> pretraiterPhonetique();
-             case "3" -> pretraiterAccents();
-             
-             case "4" -> {
-                 return;
-             }
-             default -> System.out.println("Choix invalide.");
-         }
-         }
-		  
-	  }
+		        switch (choix) {
+		            case "1" -> suprimerpretraiterMinuscule();
+		            case "2" -> pretraiterPhonetique();
+		            case "3" -> pretraiterAccents();
+		            case "4" -> {
+		                return;
+		            }
+		            default -> System.out.println("Choix invalide.");
+		        }
+		    }
+		}
+
 	  static void pretraiterPhonetique(){
 		  moteur.getPretraiteur().add(new PretraiteurPhonetique());
 		  
 	  }
 	  static void pretraiterAccents() {
 		  moteur.getPretraiteur().add(new PretraiteurSansAccents()); 
-		
+
 	  }
 	  static void suprimerpretraiterMinuscule() {
-		  
-		  
-		  for (Pretraiteur p : moteur.getPretraiteur()) {
-			  if(p instanceof PretraiteurMinuscule) {
-				  moteur.getPretraiteur().remove(p);
-			  }
-			  
-		  }
-		  
-		  
-	  }
+		    Iterator<Pretraiteur> it = moteur.getPretraiteur().iterator();
+		    while (it.hasNext()) {
+		        Pretraiteur p = it.next();
+		        if (p instanceof PretraiteurMinuscule) {
+		            it.remove(); 
+		        }
+		    }
+		}
+
 	  
 	  static void afficheMenuSelectionneur() {
 	        System.out.println("\n===== MENU SELECTIONNEUR =====\n");
@@ -228,24 +225,22 @@ public class Application {
 	  
 	  
 	  static void choixSelectionneur() {
-		  afficheMenuSelectionneur();
-          String choix = scanner.nextLine();
+		    while (true) {
+		        afficheMenuSelectionneur();
+		        String choix = scanner.nextLine();
 
-          while(true) {
-        	  switch (choix) {
-              case "1" -> SelectionneurDeTousLesResultats();
-              case "2" -> SelectionneurAvecSeuil();
-              case "3" -> SelectionneurNPremiers();
-              case "4" -> {
-                  
-                  return;
-              }
-              default -> System.out.println("Choix invalide.");
-        	  }
-          }
-        
-	  }
-      
+		        switch (choix) {
+		            case "1" -> SelectionneurDeTousLesResultats();
+		            case "2" -> SelectionneurAvecSeuil();
+		            case "3" -> SelectionneurNPremiers();
+		            case "4" -> {
+		                return;  
+		            }
+		            default -> System.out.println("Choix invalide.");
+		        }
+		    }
+		}
+
 	  static void SelectionneurDeTousLesResultats() {
 		  moteur.setSelectionneur(new SelectionneurDeTousLesResultats());
 		  

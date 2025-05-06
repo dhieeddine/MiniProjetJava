@@ -6,7 +6,7 @@ public class SelectionneurDeTousLesResultats implements SelectionneurDeResultats
 
 	@Override
 	public <T extends ResultatDeMatching> List<T> selectionner(List<T> liste) {
-		// TODO Auto-generated method stub
+		
 		return liste;
 	}
 
