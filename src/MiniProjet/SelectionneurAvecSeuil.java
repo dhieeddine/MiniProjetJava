@@ -19,13 +19,13 @@ public class SelectionneurAvecSeuil implements SelectionneurDeResultatsDeMatchin
 	}
 
 	@Override
-	public <T extends ResultatDeMatching> List<T> selectionner(List<T> liste) {
+	public  List<CoupleNomsScore> selectionner(List<CoupleNomsScore> liste) {
 	    if (liste == null || liste.isEmpty()) {
-	        return new ArrayList<T>();
+	        return new ArrayList<CoupleNomsScore>();
 	    }
 
-	    List<T> resultatsFiltres = new ArrayList<>();
-	    for (T resultat : liste) {
+	    List<CoupleNomsScore> resultatsFiltres = new ArrayList<CoupleNomsScore>();
+	    for (CoupleNomsScore resultat : liste) {
 	        if (resultat.getScore() >= seuil) {
 	            resultatsFiltres.add(resultat);
 	        }

@@ -33,6 +33,11 @@ public class CoupleNomsScore implements ResultatDeMatching {
 	public void setScore(double score) {
 		this.score = score;
 	}
+	@Override
+	public int compareTo(ResultatDeMatching o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	
 }

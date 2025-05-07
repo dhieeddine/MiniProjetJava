@@ -6,9 +6,9 @@ import java.util.List;
 public class SelectionneurDeTousLesResultats implements SelectionneurDeResultatsDeMatching {
 
 	@Override
-	public <T extends ResultatDeMatching> List<T> selectionner(List<T> liste) {
+	public List<CoupleNomsScore> selectionner(List<CoupleNomsScore> liste) {
 		 if (liste == null || liste.isEmpty()) {
-		        return new ArrayList<T>();
+		        return new ArrayList<CoupleNomsScore>();
 		    }
 
 		

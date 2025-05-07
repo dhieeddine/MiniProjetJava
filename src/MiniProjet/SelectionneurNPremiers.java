@@ -13,17 +13,17 @@ public class SelectionneurNPremiers implements SelectionneurDeResultatsDeMatchin
     }
 
     @Override
-    public <T extends ResultatDeMatching> List<T> selectionner(List<T> liste) {
+    public  List<CoupleNomsScore> selectionner(List<CoupleNomsScore> liste) {
         if (liste == null || liste.isEmpty()) {
             return new ArrayList<>();
         }
 
-        List<T> copie = new ArrayList<>(liste);
+        List<CoupleNomsScore> copie = new ArrayList<CoupleNomsScore>(liste);
 
         
-        Collections.sort(copie, new Comparator<ResultatDeMatching>() {
+        Collections.sort(copie, new Comparator<CoupleNomsScore>() {
             @Override
-            public int compare(ResultatDeMatching a, ResultatDeMatching b) {
+            public int compare(CoupleNomsScore a, CoupleNomsScore b) {
                 return Double.compare(b.getScore(), a.getScore());
             }
         });

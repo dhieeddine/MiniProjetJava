@@ -88,7 +88,7 @@ public class MoteurMatching {
 	}
 
 
-	public List<NomScore> rechercher(String nom, List<EntiteNom> listeNoms){
+	public List<CoupleNomsScore> rechercher(String nom, List<EntiteNom> listeNoms){
 		
 
 		List<EntiteNom> list2= new ArrayList<>();
@@ -102,18 +102,18 @@ public class MoteurMatching {
 		
 		List<CoupleDeNom> coupleDeNoms =new ArrayList<CoupleDeNom>();
 		coupleDeNoms = generateurCandidats.genererCandidats(list2,listeNoms);
-		List<NomScore> resultat = new ArrayList<NomScore>();
+		List<CoupleNomsScore> resultat = new ArrayList<CoupleNomsScore>();
 		
 	   
 		for(int i=0; i<coupleDeNoms.size(); i++) {
 			EntiteNom e = new EntiteNom(coupleDeNoms.get(i).getNom2().getNomcomplet() , coupleDeNoms.get(i).getNom2().getId());
 			double score = comparateurNoms.comparer(e.getNomcomplet(),entiteNom.getNomcomplet());
-			NomScore res = new NomScore( e, score);
+			CoupleNomsScore res = new CoupleNomsScore(entiteNom, e, score);
 			resultat.add(res);
 			
 			
 		}  
-		return selectionneur.selectionner(resultat);
+		return selectionneur.selectionner(resultat); 
 		
 	}
 	
@@ -144,13 +144,12 @@ public class MoteurMatching {
 		}
 		List<CoupleNomsScore> resultat=new ArrayList<CoupleNomsScore>();
 		for (int i=0;i<list.size()-1;i++){
-			List<NomScore> listNomsScores=rechercher(list.get(i).getNomcomplet(),list.subList(i+1,list.size()));
-			for(NomScore nomScore: listNomsScores) {
-				CoupleNomsScore res=new CoupleNomsScore(list.get(i),nomScore.getNom(),nomScore.getScore());
-				resultat.add(res);
+			List<CoupleNomsScore> listNomsScores=rechercher(list.get(i).getNomcomplet(),list.subList(i+1,list.size()));
+			for(CoupleNomsScore nomScore: listNomsScores) {
+				resultat.add(nomScore);
 			}
 			
-		}
+		} 
 		return resultat;
 	}
 

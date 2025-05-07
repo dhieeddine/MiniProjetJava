@@ -305,35 +305,43 @@ public class Application {
 	  
 	  static void effectuerRecherche()  {
 		  System.out.print("Entrez le nom à rechercher : ");
-		    String nom = scanner.nextLine();
+		    String nomOriginal = scanner.nextLine();
 		    
 		   
 		    
-		    List<EntiteNom> liste = recuperateur.recuperer();
-		    
-		    if (liste == null || liste.isEmpty()) {
+		    List<EntiteNom> listeOriginale = recuperateur.recuperer();
+		    if (listeOriginale == null || listeOriginale.isEmpty()) {
 		        System.out.println("Erreur : la liste des candidats est vide ou n'a pas pu être chargée.");
 		        return;
 		    }
 		    
+		    List<EntiteNom> listePourTraitement = new ArrayList<>();
+		    for (EntiteNom entite : listeOriginale) {
+		        listePourTraitement.add(new EntiteNom(entite.getNomcomplet(), entite.getId()));
+		    }
 		    
+		    List<CoupleNomsScore> resultats = moteur.rechercher(nomOriginal, listePourTraitement);
 		    
-		    List<NomScore> resultats = moteur.rechercher(nom, liste);
-		    
-		    System.out.println("\nRésultats pour : " + nom);
-		    for (NomScore ns : resultats) {
+		    System.out.println("\nRésultats pour : " + nomOriginal);
+		    for (CoupleNomsScore ns : resultats) {
+		        EntiteNom entiteOriginale = null;
+		        for (EntiteNom e : listeOriginale) {
+		            if (e.getId().equals(ns.getNom2().getId())) {
+		                entiteOriginale = e;
+		                break;
+		            }
+		        }
 		        
+		        if (entiteOriginale != null) {
 		            System.out.printf("Nom: %s (Score: %.2f)%n", 
-		                ns.getNom().toString(), 
+		                entiteOriginale.getNomcomplet(), 
 		                ns.getScore());
 		        }
 		    
-		    
-		
-	        
+		    }
 	        
 	        	
-	  }
+	  }  
 	  
 	  static void comparerDeuxListes() {
 	        // TODO
@@ -352,28 +360,24 @@ public class Application {
 	            System.out.println("Erreur : la liste 2 des candidats est vide ou n’a pas pu être chargée.");
 	            return;
 	        }
-		 List<CoupleNomsScore> resultat = new ArrayList<>();
+		 List<CoupleNomsScore> resultat = new ArrayList<CoupleNomsScore>();
 	       resultat = moteur.ComparerListes(list1, list2);
 		 
 		 
-	        for(CoupleNomsScore e : resultat) {
-	        	System.out.println(e.toString());
-	        }
-	        resultat = moteur.getSelectionneur().selectionner(resultat);
+	        
 	        if (resultat == null || resultat.isEmpty()) {
 	            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
 	            return;      
 	        }
 		 for(CoupleNomsScore couple : resultat) {
-			 System.out.printf("couple[ %s , %s] score = %.2f",couple.getNom1().toString(),couple.getNom2().toString(), couple.getScore());
+			 System.out.printf("\ncouple[ %s , %s] score = %.2f",couple.getNom1().toString(),couple.getNom2().toString(), couple.getScore());
 		 }
 		  
 	    }
 
 	    static void effectuerDedupliquerListe() {
 	        // TODO
-	    	 System.out.println("donner le chemin du liste à dupliquer : ");
-	    	 String chemin = scanner.next();
+	    	 
 	    	 List<EntiteNom> listeOriginale = recuperateur.recuperer();
 			    
 			    if (listeOriginale == null || listeOriginale.isEmpty()) {
