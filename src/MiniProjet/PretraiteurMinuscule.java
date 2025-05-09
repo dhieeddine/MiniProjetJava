@@ -8,7 +8,7 @@ public class PretraiteurMinuscule implements Pretraiteur {
 	public List<EntiteNom> pretraiter(List<EntiteNom> list) {
 		// TODO Auto-generated method stub
 		for(EntiteNom nom  : list) {
-			 nom.setNomcomplet(nom.getNomcomplet().toLowerCase());
+			 nom.setNomPretraite(nom.getNomPretraite().toLowerCase());
 		}
 		return list; 
 	

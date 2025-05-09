@@ -1,6 +1,6 @@
 package MiniProjet;
 
-public class CoupleNomsScore implements ResultatDeMatching {
+public class CoupleNomsScore  {
 	
 	private EntiteNom nom1;
 	private EntiteNom nom2;
@@ -33,11 +33,7 @@ public class CoupleNomsScore implements ResultatDeMatching {
 	public void setScore(double score) {
 		this.score = score;
 	}
-	@Override
-	public int compareTo(ResultatDeMatching o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	
 }

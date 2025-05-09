@@ -27,11 +27,12 @@ public class RecuperateurCSV implements Recuperateur {
 		                String[] parties = ligne.split(",");
 
 		                if (parties.length >= 2) {
-		                    String nomComplet = parties[0];
-		                    String id = parties[1];
+		                    String nomComplet = parties[1];
+		                    String id = parties[0];
 		                    entites.add(new EntiteNom(nomComplet, id));
 		                }
 		            }
+		            scanner.close();
 		        } catch (IOException e) {
 		            System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
 		        }

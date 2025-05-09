@@ -8,7 +8,7 @@ public class PretraiteurPhonetique implements Pretraiteur {
 	public List<EntiteNom> pretraiter(List<EntiteNom> list) {
 		// TODO Auto-generated method stub
 		for( EntiteNom e : list) {
-			String word = e.getNomcomplet();
+			String word = e.getNomPretraite();
 			 word = word.replaceAll("h", "");
 		        word = word.replaceAll("e", "");
 		        word = word.replaceAll("a", "");
@@ -19,11 +19,9 @@ public class PretraiteurPhonetique implements Pretraiteur {
 
 		        // Remplacements phonétiques simples
 		        word = word.replaceAll("ph", "f");
-		        word = word.replaceAll("c", "k");
 		        word = word.replaceAll("q", "k");
 		        word = word.replaceAll("x", "ks");
-		        word = word.replaceAll("z", "s");
-		        e.setNomcomplet(word);
+		        e.setNomPretraite(word);
 			
 		}
 		return list; 

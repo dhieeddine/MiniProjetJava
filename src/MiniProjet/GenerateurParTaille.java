@@ -19,7 +19,7 @@ public class GenerateurParTaille implements GenerateurCandidats {
 		List<CoupleDeNom> listeCouples = new ArrayList<CoupleDeNom>();
 		for( EntiteNom e1 : listeNom1) {
 			for (EntiteNom e2 : listeNoms2) {
-				if(Math.abs(e1.getNomcomplet().length()- e2.getNomcomplet().length())<= maxDistance) {
+				if(Math.abs(e1.getNomPretraite().length()- e2.getNomPretraite().length())<= maxDistance) {
 					listeCouples.add(new CoupleDeNom(e1,e2));
 			    } 
 			}

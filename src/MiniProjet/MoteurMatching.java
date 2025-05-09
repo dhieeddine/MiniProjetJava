@@ -81,10 +81,10 @@ public class MoteurMatching {
 
 	public MoteurMatching() {
 		
-	     generateurCandidats = new GenerateurDeTousLesCouples();
-	     pretraiteur = new ArrayList<>(List.of(new PretraiteurMinuscule()));
+	     generateurCandidats = new GenerateurAleatoire(50);
+	     pretraiteur = new ArrayList<Pretraiteur>(List.of(new PretraiteurMinuscule(),new PretraiteurSansAccents(), new PretraiteurPhonetique(),new PretraiteurSansCaracteresSpeciaux()));
 	     comparateurNoms = new ComparateurExact();
-	     selectionneur = new SelectionneurDeTousLesResultats();
+	     selectionneur = new SelectionneurNPremiers(20);
 	}
 
 
@@ -106,8 +106,8 @@ public class MoteurMatching {
 		
 	   
 		for(int i=0; i<coupleDeNoms.size(); i++) {
-			EntiteNom e = new EntiteNom(coupleDeNoms.get(i).getNom2().getNomcomplet() , coupleDeNoms.get(i).getNom2().getId());
-			double score = comparateurNoms.comparer(e.getNomcomplet(),entiteNom.getNomcomplet());
+			EntiteNom e = coupleDeNoms.get(i).getNom1();
+			double score = comparateurNoms.comparer(e.getNomPretraite(),entiteNom.getNomPretraite());
 			CoupleNomsScore res = new CoupleNomsScore(entiteNom, e, score);
 			resultat.add(res);
 			
@@ -126,13 +126,11 @@ public class MoteurMatching {
 		
 	   
 		for(int i=0; i<coupleDeNoms.size(); i++) {
-			EntiteNom e1 = new EntiteNom(coupleDeNoms.get(i).getNom1().getNomcomplet() , coupleDeNoms.get(i).getNom1().getId());
-			EntiteNom e2 = new EntiteNom(coupleDeNoms.get(i).getNom2().getNomcomplet() , coupleDeNoms.get(i).getNom2().getId());
-			double score = comparateurNoms.comparer(e2.getNomcomplet(),e1.getNomcomplet());
-			CoupleNomsScore res = new CoupleNomsScore(e1, e2, score);
-			resultat.add(res);
-			 
 			
+			double score = comparateurNoms.comparer(coupleDeNoms.get(i).getNom2().getNomPretraite(),coupleDeNoms.get(i).getNom2().getNomPretraite());
+			CoupleNomsScore res = new CoupleNomsScore(coupleDeNoms.get(i).getNom1(), coupleDeNoms.get(i).getNom2(), score);
+			resultat.add(res);
+						
 		}  
 		
 		return resultat;
@@ -144,7 +142,7 @@ public class MoteurMatching {
 		}
 		List<CoupleNomsScore> resultat=new ArrayList<CoupleNomsScore>();
 		for (int i=0;i<list.size()-1;i++){
-			List<CoupleNomsScore> listNomsScores=rechercher(list.get(i).getNomcomplet(),list.subList(i+1,list.size()));
+			List<CoupleNomsScore> listNomsScores=rechercher(list.get(i).getNomPretraite(),list.subList(i+1,list.size()));
 			for(CoupleNomsScore nomScore: listNomsScores) {
 				resultat.add(nomScore);
 			}

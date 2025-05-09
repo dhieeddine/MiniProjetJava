@@ -12,7 +12,7 @@ public class PretraiteurSansAccents implements Pretraiteur {
             return new ArrayList<>();
         }
 		for (EntiteNom nom : list) {
-			String texte = nom.getNomcomplet();
+			String texte = nom.getNomPretraite();
 			
 
 	        // 1. Supprimer les accents (ex: é → e)
@@ -21,8 +21,7 @@ public class PretraiteurSansAccents implements Pretraiteur {
 
 	        
 
-	        // 3. Optionnel : enlever les espaces en trop
-	        nom.setNomcomplet(sansAccents.trim().replaceAll(" +", " "));
+	        nom.setNomPretraite(sansAccents.trim().replaceAll(" +", " "));
 		}
 		return list;
 	}

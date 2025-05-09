@@ -26,7 +26,7 @@ public class ComparateurNGram implements ComparateurNoms {
         union.addAll(ngrams2);
 
         double score = (2.0 * intersection.size()) / (ngrams1.size() + ngrams2.size());
-        return Math.round(score * 100.0) / 100.0;
+        return Math.round(score * 100.0) / 100.0; 
     } 
 
     private Set<String> generateNGrams(String str, int n) {

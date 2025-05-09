@@ -307,36 +307,30 @@ public class Application {
 		  System.out.print("Entrez le nom à rechercher : ");
 		    String nomOriginal = scanner.nextLine();
 		    
-		   
+		    
 		    
 		    List<EntiteNom> listeOriginale = recuperateur.recuperer();
 		    if (listeOriginale == null || listeOriginale.isEmpty()) {
-		        System.out.println("Erreur : la liste des candidats est vide ou n'a pas pu être chargée.");
+		        System.out.println("Erreur : la liste des candidats est vide ou n a pas pu etre chargee.");
 		        return;
 		    }
 		    
-		    List<EntiteNom> listePourTraitement = new ArrayList<>();
-		    for (EntiteNom entite : listeOriginale) {
-		        listePourTraitement.add(new EntiteNom(entite.getNomcomplet(), entite.getId()));
+		   
+		    
+		    List<CoupleNomsScore> resultats = moteur.rechercher(nomOriginal, listeOriginale);
+		    if (resultats == null || resultats.isEmpty()) {
+		        System.out.println("aucune resultat trouver  pour le nom spécifie.");
+		        return;
 		    }
-		    
-		    List<CoupleNomsScore> resultats = moteur.rechercher(nomOriginal, listePourTraitement);
-		    
 		    System.out.println("\nRésultats pour : " + nomOriginal);
 		    for (CoupleNomsScore ns : resultats) {
-		        EntiteNom entiteOriginale = null;
-		        for (EntiteNom e : listeOriginale) {
-		            if (e.getId().equals(ns.getNom2().getId())) {
-		                entiteOriginale = e;
-		                break;
-		            }
-		        }
+		       
+		       
 		        
-		        if (entiteOriginale != null) {
 		            System.out.printf("Nom: %s (Score: %.2f)%n", 
-		                entiteOriginale.getNomcomplet(), 
+		                 ns.getNom2(),
 		                ns.getScore());
-		        }
+		        
 		    
 		    }
 	        
@@ -349,7 +343,7 @@ public class Application {
 		  List<EntiteNom> list1 =new ArrayList<EntiteNom>();
 	      list1 = recuperateur.recuperer();
 	      if (list1 == null || list1.isEmpty()) {
-	            System.out.println("Erreur : la liste 1  des candidats est vide ou n’a pas pu être chargée.");
+	            System.out.println("Erreur : la liste 1  des candidats est vide ou n’a pas pu être chargee.");
 	            return;
 	        }
 	        
@@ -357,7 +351,7 @@ public class Application {
 		 List<EntiteNom> list2 =new ArrayList<EntiteNom>();
 		 list2 = recuperateur.recuperer();
 		 if (list2 == null || list2.isEmpty()) {
-	            System.out.println("Erreur : la liste 2 des candidats est vide ou n’a pas pu être chargée.");
+	            System.out.println("Erreur : la liste 2 des candidats est vide ou n’a pas pu être chargee.");
 	            return;
 	        }
 		 List<CoupleNomsScore> resultat = new ArrayList<CoupleNomsScore>();
@@ -366,7 +360,7 @@ public class Application {
 		 
 	        
 	        if (resultat == null || resultat.isEmpty()) {
-	            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
+	            System.out.println("Aucun resultat trouve pour le nom spécifie.");
 	            return;      
 	        }
 		 for(CoupleNomsScore couple : resultat) {
@@ -381,16 +375,16 @@ public class Application {
 	    	 List<EntiteNom> listeOriginale = recuperateur.recuperer();
 			    
 			    if (listeOriginale == null || listeOriginale.isEmpty()) {
-			        System.out.println("Erreur : la liste des candidats est vide ou n'a pas pu être chargée.");
+			        System.out.println("Erreur : la liste des candidats est vide ou n'a pas pu etre chargee.");
 			        return;
 			    }
 			    List<CoupleNomsScore> resultat = new ArrayList<>(moteur.DedupliquerList(listeOriginale));
 			    if (resultat == null || resultat.isEmpty()) {
-		            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
+		            System.out.println("Aucun resultat trouve pour le nom specifie.");
 		            return;      
 		        }
 				 for(CoupleNomsScore couple : resultat) {
-					 System.out.printf("couple[ %s , %s] score = %.2f",couple.getNom1().toString(),couple.getNom2().toString(), couple.getScore());
+					 System.out.printf("couple[ %s , %s] score = %.2f",couple.getNom1(),couple.getNom2(), couple.getScore());
 				 }
 	    }
 

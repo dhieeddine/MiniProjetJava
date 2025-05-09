@@ -1,6 +1,6 @@
 package MiniProjet;
 
-public class NomScore implements ResultatDeMatching {
+public class NomScore {
 
 	
 	
@@ -17,7 +17,6 @@ public class NomScore implements ResultatDeMatching {
 		this.nom = nom;
 		this.score = score;
 	}
-	@Override
 	public double getScore() {
 		return score;
 	}
@@ -30,10 +29,6 @@ public class NomScore implements ResultatDeMatching {
 	public void setNom(EntiteNom nom) {
 		this.nom = nom;
 	}
-	@Override
-	public int compareTo(ResultatDeMatching o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 }
