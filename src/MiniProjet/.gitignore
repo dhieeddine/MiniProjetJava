@@ -32,3 +32,10 @@
 /ComparateurLevenstein.class
 /comparateurJaroWinkler.class
 /ResultatDeMatchin.class
+/Indexeur.class
+/com.class
+/ComparateurScore.class
+/IndexeurHashMap.class
+/GenetateurAleatoireIndex.class
+/GenetateurIndex.class
+/GenetateurParTaille.class

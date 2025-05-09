@@ -120,7 +120,7 @@ public class Application {
 	  static void generateurParTaille() {
 		  System.out.println("\nchoisir le taille max de difference: ");
 		  int n = scanner.nextInt();
-		  moteur.setGenerateurCandidats(new GenerateurParTaille(n));
+		  moteur.setGenerateurCandidats(new GenetateurParTaille());
 	  }
 	  
 	  
