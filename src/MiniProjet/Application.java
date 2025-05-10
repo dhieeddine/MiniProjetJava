@@ -4,8 +4,9 @@ import java.io.*;
 import java.util.*;
 public class Application {
 	static MoteurMatching moteur = new MoteurMatching();
-	static Scanner scanner = new Scanner(System.in);
+	
 	static Recuperateur recuperateur = new RecuperateurCSV();
+	static  Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		
@@ -16,6 +17,8 @@ public class Application {
 		//D:/Desktop/listesNoms/peps_names_658k.csv
 			
 		 while (true) {
+			        afficherMenuPrincipal();
+			        //Scanner scanner = new Scanner(System.in);
 			
 		            String choix = scanner.nextLine();
 	
@@ -31,6 +34,7 @@ public class Application {
 		                }
 		                default -> System.out.println("Choix invalide.");
 		            }
+		            
 		            
 		        }
 		 
@@ -74,6 +78,7 @@ public class Application {
               default -> System.out.println("Choix invalide.");
              }
           }
+          
 
           
 		  
@@ -264,7 +269,7 @@ public class Application {
 		   EntiteNom nom = new EntiteNom(nomOriginal,"-1");
 		    List<EntiteNom> listeOriginale = recuperateur.recuperer();
 		    long start = System.currentTimeMillis();
-            afficherMenuPrincipal();
+           
 		    
 		    if (listeOriginale == null || listeOriginale.isEmpty()) {
 		        System.out.println("Erreur : la liste des candidats est vide ou n'a pas pu être chargée.");
@@ -309,7 +314,7 @@ public class Application {
 	            return;
 	        }
 		 long start = System.currentTimeMillis();
-         afficherMenuPrincipal();
+        
 		 List<CoupleNomsScore> resultat = new ArrayList<>();
 	       resultat = moteur.ComparerListes(list1, list2);
 		 
@@ -337,7 +342,6 @@ public class Application {
 			        return;
 			    }
 			    long start = System.currentTimeMillis();
-	            afficherMenuPrincipal();
 			    List<CoupleNomsScore> resultat = new ArrayList<>(moteur.DedupliquerList(listeOriginale));
 			    if (resultat == null || resultat.isEmpty()) {
 		            System.out.println("Aucun résultat trouvé pour le nom spécifié.");

@@ -83,8 +83,9 @@ public class MoteurMatching {
 	public MoteurMatching() {
 		
 	     generateurCandidats = new GenerateurParTaille();
-	     pretraiteur = new ArrayList<Pretraiteur>(List.of(new PretraiteurMinuscule(),new PretraiteurSansAccents(), new PretraiteurPhonetique(),new PretraiteurSansCaracteresSpeciaux()));
+	     pretraiteur = new ArrayList<Pretraiteur>(List.of(new PretraiteurMinuscule(),new PretraiteurSansAccents()));
 	     comparateurNoms = new ComparateurJaroWinkler();
+	    // selectionneur = new SelectionneurAvecSeuil(0.5);
 	     selectionneur = new SelectionneurNPremiers(100);
 	}
 
