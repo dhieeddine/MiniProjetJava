@@ -26,8 +26,4 @@ public class GenerateurAleatoire implements GenerateurCandidats {
 		
 		return listCouples;
 	}
-
-
-	
-
 }

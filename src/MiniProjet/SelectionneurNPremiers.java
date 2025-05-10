@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class SelectionneurNPremiers implements SelectionneurDeResultatsDeMatching {
     private int nombreResultats;
-
+ 
     public SelectionneurNPremiers(int nombreResultats) {
         this.nombreResultats = nombreResultats;
     }

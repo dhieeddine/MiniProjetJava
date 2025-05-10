@@ -25,7 +25,7 @@ public class CoupleNomsScore  {
 	}
 	@Override
 	public String toString() {
-		return "CoupleNomsScore [" + nom1 + ", " + nom2 + ", score= " + score + "]";
+		return "CoupleNomsScore [" + nom1 + ", " + nom2 + ", score= " + score + "]\n";
 	}
 	public double getScore() {
 		return score;

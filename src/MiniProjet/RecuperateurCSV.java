@@ -32,7 +32,7 @@ public class RecuperateurCSV implements Recuperateur {
 		                    entites.add(new EntiteNom(nomComplet, id));
 		                }
 		            }
-		            scanner.close();
+		           
 		        } catch (IOException e) {
 		            System.out.println("Erreur lors de la lecture du fichier : " + e.getMessage());
 		        }

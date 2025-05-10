@@ -2,18 +2,20 @@ package MiniProjet;
 
 import java.util.*;
 
-public class GenetateurParTaille implements GenerateurCandidats {
+public class GenerateurParTaille implements GenerateurCandidats {
    
 	@Override
 	public List<CoupleDeNom> genererCandidats(List<EntiteNom> listeNom1, List<EntiteNom> listeNoms2) {
 		// TODO Auto-generated method stub
+		
+		
 		Indexeur indexeur = new IndexeurHashMap() ;
 		Map<Integer,List<EntiteNom>> map = (Map<Integer, List<EntiteNom>>) indexeur.indexer(listeNoms2);
 		List<CoupleDeNom> couple = new ArrayList<CoupleDeNom>();
 		for(EntiteNom e : listeNom1) {
 			int taille = e.getNomPretraite().length();
-			int d =(int) Math.round(taille *0.8);
-			int f =(int) Math.round(taille*1.2);
+			int d =(int) Math.round(taille *1.0);
+			int f =(int) Math.round(taille*1.0);
 			for(int i =d; i<=f;i++) {
 				if(map.containsKey(i)) {
 					for(EntiteNom nom : map.get(i)) {

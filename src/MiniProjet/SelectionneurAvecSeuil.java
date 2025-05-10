@@ -26,11 +26,11 @@ public class SelectionneurAvecSeuil implements SelectionneurDeResultatsDeMatchin
 
 	    List<CoupleNomsScore> resultatsFiltres = new ArrayList<CoupleNomsScore>();
 	    for (CoupleNomsScore resultat : liste) {
-	        if (resultat.getScore() >= seuil) {
-	            resultatsFiltres.add(resultat);
+	        if (resultat.getScore() >= this.seuil) {
+	            resultatsFiltres.add(resultat); 
 	        }
 	    }
-	    return resultatsFiltres;
+	    return resultatsFiltres; 
 	}
 
 }

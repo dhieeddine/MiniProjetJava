@@ -1,6 +1,6 @@
 package MiniProjet;
 
-public class comparateurJaroWinkler implements ComparateurNoms {
+public class ComparateurJaroWinkler implements ComparateurNoms {
 
 	@Override
 	     public double comparer(String s1, String s2) {
