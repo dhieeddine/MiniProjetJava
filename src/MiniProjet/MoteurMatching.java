@@ -82,11 +82,17 @@ public class MoteurMatching {
 
 	public MoteurMatching() {
 		
+	    // generateurCandidats = new GenerateurAleatoire(1000);
+	    // generateurCandidats = new GenerateurAvecPrefix();
+	    // generateurCandidats = new GenerateurDeTousLesCouples();
 	     generateurCandidats = new GenerateurParTaille();
 	     pretraiteur = new ArrayList<Pretraiteur>(List.of(new PretraiteurMinuscule(),new PretraiteurSansAccents()));
-	     comparateurNoms = new ComparateurJaroWinkler();
-	    // selectionneur = new SelectionneurAvecSeuil(0.5);
-	     selectionneur = new SelectionneurNPremiers(100);
+	     comparateurNoms = new ComparateurExact();
+	    // comparateurNoms = new ComparateurLevenstein();
+	    // comparateurNoms = new ComparateurJaroWinkler();
+	    // comparateurNoms = new ComparateurNGram(3);
+	     selectionneur = new SelectionneurAvecSeuil(0.7);
+	    // selectionneur = new SelectionneurNPremiers(100);
 	}
 
 

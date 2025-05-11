@@ -279,6 +279,7 @@ public class Application {
 		   
 		    
 		    List<CoupleNomsScore> resultats = moteur.rechercher(nom, listeOriginale);
+		    long end = System.currentTimeMillis();
 		    
 		    System.out.println("\nRésultats pour : " + nom.getNomcomplet());
 		    for (CoupleNomsScore ns : resultats) {
@@ -289,7 +290,7 @@ public class Application {
 		                ns.getNom2(), 
 		                ns.getScore());
 		    }
-		    long end = System.currentTimeMillis();
+		  
             System.out.println("Execution time: " + (end - start) + " ms");
 	        
 	        
@@ -321,16 +322,17 @@ public class Application {
 		 
 	     
 	       resultat = moteur.getSelectionneur().selectionner(resultat);
+	       long end = System.currentTimeMillis();
 	        if (resultat == null || resultat.isEmpty()) {
 	            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
 	            return;      
 	        }
 		 for(CoupleNomsScore couple : resultat) {
 			 System.out.println(couple);
-		 }long end = System.currentTimeMillis();
          System.out.println("Execution time: " + (end - start) + " ms");
 		  
 	    }
+	  }
 
 	    static void effectuerDedupliquerListe() {
 	        // TODO
