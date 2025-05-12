@@ -83,17 +83,18 @@ public class MoteurMatching {
 	public MoteurMatching() {
 		
 	    // generateurCandidats = new GenerateurAleatoire(1000);
-	    // generateurCandidats = new GenerateurAvecPrefix();
+	     //generateurCandidats = new GenerateurAvecPrefix();
 	    // generateurCandidats = new GenerateurDeTousLesCouples();
 	     generateurCandidats = new GenerateurParTaille();
-	     pretraiteur = new ArrayList<Pretraiteur>(List.of(new PretraiteurMinuscule(),new PretraiteurSansAccents()));
-	     comparateurNoms = new ComparateurExact();
-	    // comparateurNoms = new ComparateurLevenstein();
+	     pretraiteur = new ArrayList<Pretraiteur>(List.of(new PretraiteurMinuscule(),new PretraiteurSansAccents(),new PretraiteurDeTRiNom(),new PretraiteurPhonetique()));
+	    // comparateurNoms = new ComparateurExact();     
+	     comparateurNoms = new ComparateurLevenstein();
 	    // comparateurNoms = new ComparateurJaroWinkler();
 	    // comparateurNoms = new ComparateurNGram(3);
-	     selectionneur = new SelectionneurAvecSeuil(0.7);
+	     selectionneur = new SelectionneurAvecSeuil(0.8);
 	    // selectionneur = new SelectionneurNPremiers(100);
 	}
+	
 
 
 	public List<CoupleNomsScore> rechercher(EntiteNom entiteNom, List<EntiteNom> listeNoms){
@@ -162,8 +163,8 @@ public class MoteurMatching {
 				for(int j =i+1;j<listNoms.size();j++) {
 					double score = comparateurNoms.comparer(listNoms.get(i).getNomPretraite(),listNoms.get(j).getNomPretraite());
 					CoupleNomsScore res = new CoupleNomsScore(listNoms.get(i),listNoms.get(i), score);
+					
 					resultat.add(res);
-
 				}
 			}
 		} 
