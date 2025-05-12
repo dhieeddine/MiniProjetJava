@@ -26,7 +26,7 @@ public class SelectionneurAvecSeuil implements SelectionneurDeResultatsDeMatchin
 
 	    List<CoupleNomsScore> resultatsFiltres = new ArrayList<CoupleNomsScore>();
 	    for (CoupleNomsScore resultat : liste) {
-	        if (resultat.getScore() >= this.seuil) {
+	        if (resultat.score() >= this.seuil) {
 	            resultatsFiltres.add(resultat); 
 	        }
 	    }

@@ -9,7 +9,7 @@ public class MoteurMatching {
 	
     private GenerateurCandidats generateurCandidats;
     private List<Pretraiteur> pretraiteur;
-    private ComparateurNoms comparateurNoms;
+    protected ComparateurNoms comparateurNoms;
     private SelectionneurDeResultatsDeMatching selectionneur;
 	
 	 
@@ -83,10 +83,10 @@ public class MoteurMatching {
 	public MoteurMatching() {
 		
 	    // generateurCandidats = new GenerateurAleatoire(1000);
-	    // generateurCandidats = new GenerateurAvecPrefix();
+	     generateurCandidats = new GenerateurAvecPrefix();
 	    // generateurCandidats = new GenerateurDeTousLesCouples();
-	     generateurCandidats = new GenerateurParTaille();
-	     pretraiteur = new ArrayList<Pretraiteur>(List.of(new PretraiteurMinuscule(),new PretraiteurSansAccents()));
+	    // generateurCandidats = new GenerateurParTaille();
+	     pretraiteur = new ArrayList<Pretraiteur>(List.of(new PretraiteurMinuscule(),new PretraiteurSansAccents(), new PretraiteurPhonetique()));
 	     comparateurNoms = new ComparateurExact();
 	    // comparateurNoms = new ComparateurLevenstein();
 	    // comparateurNoms = new ComparateurJaroWinkler();
@@ -141,17 +141,19 @@ public class MoteurMatching {
 		for(int i=0; i<coupleDeNoms.size(); i++) {
 			
 			double score = comparateurNoms.comparer(coupleDeNoms.get(i).getNom1().getNomPretraite(),coupleDeNoms.get(i).getNom2().getNomPretraite());
+			if(score>=0.8) {
+				System.out.printf("%s , %f",coupleDeNoms.toString(), score);
+			}
 			CoupleNomsScore res = new CoupleNomsScore(coupleDeNoms.get(i).getNom1(), coupleDeNoms.get(i).getNom2(), score);
-			resultat.add(res);
+			resultat.add(res);   
 						
 		}  
 		
-		return resultat;
+		return null;
 	}
 	public List<CoupleNomsScore> DedupliquerList(List<EntiteNom> list){
 		for(int i=0;i<pretraiteur.size();i++){
-			list=pretraiteur.get(i).pretraiter(list); 
-			
+			list=pretraiteur.get(i).pretraiter(list); 			
 		}
 		Indexeur indexeur = new IndexeurHashMap() ;
 		Map<Integer,List<EntiteNom>> map = (Map<Integer, List<EntiteNom>>) indexeur.indexer(list);

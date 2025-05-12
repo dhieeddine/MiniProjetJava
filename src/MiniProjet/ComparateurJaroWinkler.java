@@ -6,9 +6,7 @@ public class ComparateurJaroWinkler implements ComparateurNoms {
 	     public double comparer(String s1, String s2) {
 	        if (s1 == null || s2 == null || s1.isEmpty() || s2.isEmpty()) return 0.0;
 
-	        // 1. Convertir en minuscules pour une comparaison insensible à la casse
-	        s1 = s1.toLowerCase();
-	        s2 = s2.toLowerCase();
+	        
 
 	        // 2. Longueurs
 	        int len1 = s1.length();

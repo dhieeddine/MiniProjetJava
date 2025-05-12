@@ -28,6 +28,8 @@ public class Application {
 		                case "3" -> effectuerDedupliquerListe();
 		                case "4" -> configurerParametres();
 		                case "5" -> {
+		                	
+
 		                    System.out.println("Fin du programme.");
 		                    scanner.close();
 		                    return;
@@ -287,11 +289,11 @@ public class Application {
 		        
 		        
 		            System.out.printf("Nom: %s (Score: %.2f)%n", 
-		                ns.getNom2(), 
-		                ns.getScore());
+		                ns.nom2(), 
+		                ns.score());
 		    }
-		  
             System.out.println("Execution time: " + (end - start) + " ms");
+            resultats.clear();
 	        
 	        
 	        	
@@ -323,15 +325,17 @@ public class Application {
 	     
 	       resultat = moteur.getSelectionneur().selectionner(resultat);
 	       long end = System.currentTimeMillis();
-	        if (resultat == null || resultat.isEmpty()) {
+	      /*  if (resultat == null || resultat.isEmpty()) {
 	            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
 	            return;      
 	        }
 		 for(CoupleNomsScore couple : resultat) {
 			 System.out.println(couple);
-         System.out.println("Execution time: " + (end - start) + " ms");
+
 		  
-	    }
+	    }*/
+		 resultat.clear();
+         System.out.println("Execution time: " + (end - start) + " ms");
 	  }
 
 	    static void effectuerDedupliquerListe() {
@@ -344,15 +348,17 @@ public class Application {
 			        return;
 			    }
 			    long start = System.currentTimeMillis();
-			    List<CoupleNomsScore> resultat = new ArrayList<>(moteur.DedupliquerList(listeOriginale));
-			    if (resultat == null || resultat.isEmpty()) {
+			   List<CoupleNomsScore> resultat = new ArrayList<>(moteur.DedupliquerList(listeOriginale));
+			   /* if (resultat == null || resultat.isEmpty()) {
 		            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
 		            return;      
 		        }
 			    resultat = moteur.getSelectionneur().selectionner(resultat);
 				 for(CoupleNomsScore couple : resultat) {
 					 System.out.println(couple);
+					 
 				 }
+				 resultat.clear();*/
 				 long end = System.currentTimeMillis();
 		            System.out.println("Execution time: " + (end - start) + " ms");
 	    }
