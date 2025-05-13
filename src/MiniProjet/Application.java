@@ -87,9 +87,9 @@ public class Application {
 	    	    System.out.println("\n===== MENU GENERATEUR DE CANDIDATS =====");
 	    	    System.out.println("1. Choisir tous combinisants possibles\r\n");
 	    	    System.out.println("2. Choisir generateur aleatoire\r\n");
-
-		        System.out.println("3. Choisir generateur par taille de noms \r\n");
-		        System.out.println("4. Quitter\n");
+	    	    System.out.println("3. Choisir generateur par prefix \r\n");
+		        System.out.println("4. Choisir generateur par taille de noms \r\n");
+		        System.out.println("5. Quitter\n");
 		        System.out.print("Votre choix : ");
 	    }
 	  
@@ -101,8 +101,9 @@ public class Application {
         	  switch (choix) {
               case "1" -> generateurTous();
               case "2" -> generateurAleatoire();
-              case "3" -> generateurParTaille();
-              case "4" -> {
+              case "3" -> generateurAvecPrefix();
+              case "4" -> generateurParTaille();
+              case "5" -> {
                   
                   return;
               }
@@ -111,6 +112,9 @@ public class Application {
         }
 
       
+	  }
+	  static void generateurAvecPrefix() {
+		  moteur.setGenerateurCandidats(new GenerateurAvecPrefix());
 	  }
 	  
 	  static void generateurTous() {
@@ -189,9 +193,10 @@ public class Application {
 	        System.out.println("Le pretraiteur par defaut est le pretraiteur en minuscule\n");
 	        System.out.println("1.suprimer le pretraiteur en minuscule\n");
 	        System.out.println("2. Encodage phonétique\n");
-	        System.out.println("3. Suprimer les accents \n");
-	        System.out.println("4. Suprimer les caractaires speciciaux\n");
-	        System.out.println("5. Quitter\n");
+	        System.out.println("3. Pretraire suprime les accents \n");
+	        System.out.println("4. Pretraiteur suprime les caractaires speciciaux\n");
+	        System.out.println("5. Pretraiteur de tri les noms\n");
+	        System.out.println("6. Quitter\n");
 	        System.out.print("Votre choix : ");
 		  
 	  }
@@ -205,13 +210,26 @@ public class Application {
 		            case "2" -> pretraiterPhonetique();
 		            case "3" -> pretraiterAccents();
 		            case "4" -> pretraiteurSansCaracteresSpeciaux();
-		            case "5" -> {
+		            case "5" -> pretraiteurDeTRiNom();
+		            case "6" ->{
 		                return;
 		            }
 		            default -> System.out.println("Choix invalide.");
 		        }
 		    }
 		}
+	  
+	  static void pretraiteurDeTRiNom() {
+		  for (Pretraiteur p : moteur.getPretraiteur()) {
+			  if (p instanceof  PretraiteurDeTRiNom) {
+				  System.out.println("ce pretraiteur exist deja!!");
+				  return;
+			  }
+		  }
+		  
+		  moteur.getPretraiteur().add(new PretraiteurDeTRiNom());
+		  
+	  }
 
 	  static void pretraiterPhonetique(){
 		  for (Pretraiteur p : moteur.getPretraiteur()) {
