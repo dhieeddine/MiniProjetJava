@@ -36,7 +36,9 @@ public class GenerateurAvecPrefix implements GenerateurCandidats {
 	            }
 	        }
 	    }
-
+	    addedPairs=null;
+	    prefixIndex=null;
+	    couples=null;
 	    return couples;
 	}
 

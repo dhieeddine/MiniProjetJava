@@ -11,7 +11,9 @@ public class ComparateurNGram implements ComparateurNoms {
     }
 
     @Override
-    public double comparer(String nom1, String nom2) {
+    public double comparer(EntiteNom s1, EntiteNom s2) {
+    	 String nom1=s1.getNomPretraite();
+		    String nom2=s2.getNomPretraite();
         if (nom1 == null || nom2 == null || nom1.isEmpty() || nom2.isEmpty()) {
             return 0.0;
         }

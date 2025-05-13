@@ -1,14 +1,15 @@
 package MiniProjet;
-
+import java.util.*;
 public class ComparateurJaroWinkler implements ComparateurNoms {
 
 	@Override
-	     public double comparer(String s1, String s2) {
+	     public double comparer(EntiteNom nom1, EntiteNom nom2) {
+		    String s1=nom1.getNomPretraite();
+		    String s2=nom2.getNomPretraite();
 	        if (s1 == null || s2 == null || s1.isEmpty() || s2.isEmpty()) return 0.0;
 
 	        // 1. Convertir en minuscules pour une comparaison insensible à la casse
-	        s1 = s1.toLowerCase();
-	        s2 = s2.toLowerCase();
+	        
 
 	        // 2. Longueurs
 	        int len1 = s1.length();

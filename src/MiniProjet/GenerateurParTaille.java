@@ -14,8 +14,8 @@ public class GenerateurParTaille implements GenerateurCandidats {
 		List<CoupleDeNom> couple = new ArrayList<CoupleDeNom>();
 		for(EntiteNom e : listeNom1) {
 			int taille = e.getNomPretraite().length();
-			int d =(int) Math.round(taille *1.0);
-			int f =(int) Math.round(taille*1.0);
+			int d =(int) Math.round(taille -1);
+			int f =(int) Math.round(taille+1);
 			for(int i =d; i<=f;i++) {
 				if(map.containsKey(i)) {
 					for(EntiteNom nom : map.get(i)) {
@@ -27,7 +27,7 @@ public class GenerateurParTaille implements GenerateurCandidats {
 			}
 		}
 		
-		
+		map=null;
 		return couple;
 	}
 

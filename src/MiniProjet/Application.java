@@ -18,7 +18,7 @@ public class Application {
 			
 		 while (true) {
 			        afficherMenuPrincipal();
-			        //Scanner scanner = new Scanner(System.in);
+			        
 			
 		            String choix = scanner.nextLine();
 	
@@ -56,8 +56,8 @@ public class Application {
 		        System.out.println("2. Choisir une mesure de comparaison\r\n");
 		        System.out.println("3. Choisir un generateur de candidats\r\n");
 		        System.out.println("4. Choisir un selectionneur\r\n");
-		        System.out.println("5. Quitter");
-		        System.out.print("Votre choix : ");
+		        System.out.println("5. Quitter\n");
+		        System.out.print("\nVotre choix : ");
 	    }
  
 	    
@@ -75,10 +75,9 @@ public class Application {
                 
                   return;
               }
-              default -> System.out.println("Choix invalide.");
+              default -> System.out.println("\nChoix invalide.");
              }
           }
-          
 
           
 		  
@@ -90,7 +89,7 @@ public class Application {
 	    	    System.out.println("2. Choisir generateur aleatoire\r\n");
 
 		        System.out.println("3. Choisir generateur par taille de noms \r\n");
-		        System.out.println("4. Quitter");
+		        System.out.println("4. Quitter\n");
 		        System.out.print("Votre choix : ");
 	    }
 	  
@@ -107,7 +106,7 @@ public class Application {
                   
                   return;
               }
-              default -> System.out.println("Choix invalide.");
+              default -> System.out.println("\nChoix invalide.");
           } 
         }
 
@@ -126,16 +125,19 @@ public class Application {
 	  
 	  
 	  static void generateurParTaille() {
+		  
 		  moteur.setGenerateurCandidats(new GenerateurParTaille());
 	  }
 	  
 	  
 	  static void afficherMenuComparateur() {
 	        // TODO 
-	    	    System.out.println("\n===== MENU COMPARATEUR =====");
+	    	    System.out.println("\n===== MENU COMPARATEUR =====\n");
 	    	    System.out.println("1. Choisir comparateur exact\r\n");
 		        System.out.println("2. Choisir comparateur avec N-Gram \r\n");
-		        System.out.println("3. Quitter");
+		        System.out.println("3. choisir comparateru de Levenstein\n");
+		        System.out.println("4. choisir comparateru de JaroWinkler\n");
+		        System.out.println("5. Quitter");
 		        System.out.print("Votre choix : ");
 	    }
 	  
@@ -148,7 +150,9 @@ public class Application {
         	  switch (choix) {
               case "1" -> choixComparateurExact();
               case "2" -> choixComparateurNGram();
-              case "3" -> {
+              case "3" -> choixComparateurLevenstein() ;
+              case "4" -> choixComparateurJaro();
+              case "5" -> {
                  
                   return;
               }
@@ -162,11 +166,18 @@ public class Application {
 		  moteur.setComparateurNoms(new ComparateurExact());
 		  
 	  }
+	  static void choixComparateurJaro() {
+		  moteur.setComparateurNoms(new ComparateurJaroWinkler()); 
+		  
+	  }
 	  static void choixComparateurNGram() {
 		  System.out.println("\nchoisir le nombre de decomposition : ");
 		  int n = scanner.nextInt();
-		  scanner.nextLine();
 		  moteur.setComparateurNoms(new ComparateurNGram(n));
+		  
+	  }
+	  static void choixComparateurLevenstein() {
+		  moteur.setComparateurNoms(new ComparateurLevenstein());
 		  
 	  }
 	  
@@ -178,8 +189,9 @@ public class Application {
 	        System.out.println("Le pretraiteur par defaut est le pretraiteur en minuscule\n");
 	        System.out.println("1.suprimer le pretraiteur en minuscule\n");
 	        System.out.println("2. Encodage phonétique\n");
-	        System.out.println("3. Suprimer les accents et les caractaires speciciaux\n");
-	        System.out.println("4. Quitter\n");
+	        System.out.println("3. Suprimer les accents \n");
+	        System.out.println("4. Suprimer les caractaires speciciaux\n");
+	        System.out.println("5. Quitter\n");
 	        System.out.print("Votre choix : ");
 		  
 	  }
@@ -192,7 +204,8 @@ public class Application {
 		            case "1" -> suprimerpretraiterMinuscule();
 		            case "2" -> pretraiterPhonetique();
 		            case "3" -> pretraiterAccents();
-		            case "4" -> {
+		            case "4" -> pretraiteurSansCaracteresSpeciaux();
+		            case "5" -> {
 		                return;
 		            }
 		            default -> System.out.println("Choix invalide.");
@@ -201,10 +214,23 @@ public class Application {
 		}
 
 	  static void pretraiterPhonetique(){
+		  for (Pretraiteur p : moteur.getPretraiteur()) {
+			  if (p instanceof  PretraiteurPhonetique) {
+				  System.out.println("ce pretraiteur exist deja!!");
+				  return;
+			  }
+		  }
+		  
 		  moteur.getPretraiteur().add(new PretraiteurPhonetique());
 		  
 	  }
 	  static void pretraiterAccents() {
+		  for (Pretraiteur p : moteur.getPretraiteur()) {
+			  if (p instanceof  PretraiteurSansAccents)  {
+				  System.out.println("ce pretraiteur exist deja!!");
+				  return;
+			  }
+		  }
 		  moteur.getPretraiteur().add(new PretraiteurSansAccents()); 
 
 	  }
@@ -217,6 +243,16 @@ public class Application {
 		        }
 		    }
 		}
+	  static void pretraiteurSansCaracteresSpeciaux() {
+		  for (Pretraiteur p : moteur.getPretraiteur()) {
+			  if (p instanceof  PretraiteurSansCaracteresSpeciaux) {
+				  System.out.println("ce pretraiteur exist deja!!");
+				  return;
+				  
+			  }
+		  }
+		  moteur.getPretraiteur().add(new PretraiteurSansCaracteresSpeciaux());
+	  }
 
 	  
 	  static void afficheMenuSelectionneur() {
@@ -252,7 +288,18 @@ public class Application {
 		  
 	  }
 	  static void SelectionneurAvecSeuil() {
-		  moteur.setSelectionneur(new SelectionneurAvecSeuil(0));
+		
+		  System.out.println("donner le seuil :");
+		  String saisie = scanner.nextLine().trim().replace(',', '.');
+
+	        try {
+	            double seuil = Double.parseDouble(saisie);
+	            System.out.println("Seuil accepté : " + seuil);
+	            moteur.setSelectionneur(new SelectionneurAvecSeuil(seuil));
+	        } catch (NumberFormatException e) {
+	            System.out.println("Erreur : valeur non valide !");
+	        }
+		 
 	  }
 	  static void SelectionneurNPremiers() {
 		    System.out.println("Entrez le nombre de resultats a selectionner : ");
@@ -261,7 +308,6 @@ public class Application {
 		    moteur.setSelectionneur(new SelectionneurNPremiers(n));
 	  
 	  }
-	  
 	  static void effectuerRecherche()  {
 		  System.out.print("Entrez le nom à rechercher : ");
 		    String nomOriginal = scanner.nextLine();
@@ -324,14 +370,15 @@ public class Application {
 	       resultat = moteur.getSelectionneur().selectionner(resultat);
 	       long end = System.currentTimeMillis();
 	        if (resultat == null || resultat.isEmpty()) {
-	            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
+	            System.out.println("Aucun résultat trouvé.");
 	            return;      
 	        }
 		 for(CoupleNomsScore couple : resultat) {
 			 System.out.println(couple);
-         System.out.println("Execution time: " + (end - start) + " ms");
+        
 		  
 	    }
+		 System.out.println("Execution time: " + (end - start) + " ms");
 	  }
 
 	    static void effectuerDedupliquerListe() {
@@ -344,16 +391,19 @@ public class Application {
 			        return;
 			    }
 			    long start = System.currentTimeMillis();
+			   //moteur.DedupliquerList(listeOriginale);
 			    List<CoupleNomsScore> resultat = new ArrayList<>(moteur.DedupliquerList(listeOriginale));
-			    if (resultat == null || resultat.isEmpty()) {
-		            System.out.println("Aucun résultat trouvé pour le nom spécifié.");
+			    long end = System.currentTimeMillis();
+			   /* if (resultat == null || resultat.isEmpty()) {
+		            System.out.println("Aucun résultat trouvé.");
 		            return;      
 		        }
 			    resultat = moteur.getSelectionneur().selectionner(resultat);
+			    
 				 for(CoupleNomsScore couple : resultat) {
 					 System.out.println(couple);
 				 }
-				 long end = System.currentTimeMillis();
+				 */
 		            System.out.println("Execution time: " + (end - start) + " ms");
 	    }
 
