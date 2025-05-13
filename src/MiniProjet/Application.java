@@ -17,7 +17,7 @@ public class Application {
 		//D:/Desktop/listesNoms/peps_names_658k.csv
 			
 		 while (true) {
-			        afficherMenuPrincipal();
+			        afficherMenuPrincipal(); 
 			        
 			
 		            String choix = scanner.nextLine();
@@ -223,7 +223,7 @@ public class Application {
 		  for (Pretraiteur p : moteur.getPretraiteur()) {
 			  if (p instanceof  PretraiteurDeTRiNom) {
 				  System.out.println("ce pretraiteur exist deja!!");
-				  return;
+				  return; 
 			  }
 		  }
 		  
@@ -409,8 +409,8 @@ public class Application {
 			        return;
 			    }
 			    long start = System.currentTimeMillis();
-			   //moteur.DedupliquerList(listeOriginale);
-			    List<CoupleNomsScore> resultat = new ArrayList<>(moteur.DedupliquerList(listeOriginale));
+			   moteur.DedupliquerList(listeOriginale);
+			   // List<CoupleNomsScore> resultat = new ArrayList<>(moteur.DedupliquerList(listeOriginale));
 			    long end = System.currentTimeMillis();
 			   /* if (resultat == null || resultat.isEmpty()) {
 		            System.out.println("Aucun résultat trouvé.");
@@ -422,8 +422,11 @@ public class Application {
 					 System.out.println(couple);
 				 }
 				 */
-		            System.out.println("Execution time: " + (end - start) + " ms");
+		         System.out.println("Execution time: " + (end - start) + " ms");
 	    }
 
 	
 }
+
+
+   

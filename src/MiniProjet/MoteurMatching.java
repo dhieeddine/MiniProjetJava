@@ -80,16 +80,16 @@ public class MoteurMatching {
 		this.selectionneur = selectionneur;
 	}
 
-	public MoteurMatching() {
+	public MoteurMatching() {   
 		
 	  // generateurCandidats = new GenerateurAleatoire(10000000);
-	    // generateurCandidats = new GenerateurAvecPrefix();
+	    generateurCandidats = new GenerateurAvecPrefix();
 	    // generateurCandidats = new GenerateurDeTousLesCouples();
-	     generateurCandidats = new GenerateurParTaille();
+	   //generateurCandidats = new GenerateurParTaille();
 	     pretraiteur = new ArrayList<Pretraiteur>(List.of(new PretraiteurMinuscule(),new PretraiteurSansAccents(),new PretraiteurDeTRiNom(),new PretraiteurPhonetique()));
 	    // comparateurNoms = new ComparateurExact();     
-	     //comparateurNoms = new ComparateurLevenstein();
-	     comparateurNoms = new ComparateurJaroWinkler();
+	     comparateurNoms = new ComparateurLevenstein();
+	     //comparateurNoms = new ComparateurJaroWinkler();
 	    // comparateurNoms = new ComparateurNGram(3);
 	    selectionneur = new SelectionneurAvecSeuil(0.6);
 	     //selectionneur = new SelectionneurNPremiers(100);
@@ -177,7 +177,7 @@ public class MoteurMatching {
 						x++;
 						
 					}
-					res=null;
+					
 					//resultat.add(res); 
 				}
 				if(map.containsKey(listNoms.size()+1)) {
@@ -191,7 +191,6 @@ public class MoteurMatching {
 							x++;
 							
 						}
-						res=null;
 						//resultat.add(res); 
 					}
 				}
@@ -207,17 +206,19 @@ public class MoteurMatching {
 								
 							}
 							
-							res=null;
 							//resultat.add(res); 
 						}
-					listNoms.remove(i);
+					
 				
-			}
+			         }
+					if(x>40000)return resultat;
+					 
 			
 
 				
 				
 			}
+			listNoms=null;
 			
 		} 
 		return resultat;
